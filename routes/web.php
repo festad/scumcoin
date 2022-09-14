@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +18,13 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/',
-    [HomeController::class, 'show']
+           [HomeController::class, 'show']
 )->name('home');
 
-Route::view('/register', 'register');
+Route::get('/register',
+           [RegisterController::class, 'show']
+)->name('register');
 
-Route::get('/register', function() {
-    return view('register');
-})->name('register');
-
-Route::view('/login','login');
-
-Route::get('/login', function() {
-    return view('login');
-})->name('register');
+Route::get('/login',
+           [LoginController::class, 'show']
+)->name('register');

@@ -10,9 +10,9 @@ class HomeController extends Controller
 {
     public function show()
     {
-	return view('home',[
-	    'transactions' => DB::table('transactions')
-	        ->paginate(50)
-	]);
+	    return view('home', [
+            'transactions' => DB::table('transactions')
+                ->paginate(50)
+        ]);
     }
 }
