@@ -75,6 +75,27 @@
       </div>
     </nav>
 
+    
+    <table class="table">
+      <thead>
+	<tr>
+	  <th scope="col">Sender</th>
+	  <th scope="col">Receiver</th>
+	  <th scope="col">Amount</th>
+	</tr>
+      </thead>
+      @foreach ($transactions as $transaction)
+      <tbody>
+	<tr>
+	  <td>{{ $transaction->sender }}</td>
+	  <td>{{ $transaction->receiver }}</td>
+	  <td>{{ $transaction->amount }}</td>
+	</tr>
+      </tbody>
+      @endforeach
+    </table>
+    
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
