@@ -8,7 +8,7 @@ body {
     border-bottom-style: solid !important;
     border-bottom-color: #08c;
 
-    background-color: rgb(51, 51, 51) !important;
+    background-color: #333333 !important;
 }
 
 #navbar_toggler {
@@ -16,14 +16,14 @@ body {
 }
 
 #register_button {
-    background-color: transparent;
+    background-color: #333333;
     border-color: #08c !important;
     border: 3px solid;
     color: #08c;
 }
 
 #login_button {
-    background-color: transparent;
+    background-color: #333333;
     border-color: #08c !important;
     border: 3px solid;
     color: #08c;

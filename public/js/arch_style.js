@@ -33,7 +33,7 @@
           .borderBottomColor = "#08c"
         document.getElementById("register_button")
           .style
-          .backgroundColor = "transparent"
+          .backgroundColor = "#333333"
         document.getElementById("register_button")
           .style
           .setProperty("border-color", "#08c", "important")   
@@ -42,7 +42,7 @@
               .setProperty("color", "#08c")
         document.getElementById("login_button")
           .style
-          .backgroundColor = "transparent"
+          .backgroundColor = "#333333"
         document.getElementById("login_button")
           .style
           .setProperty("border-color", "#08c", "important")   
@@ -71,7 +71,7 @@
           .setProperty("color", "#08c")
         document.getElementById("login_button")
           .style
-          .setProperty("background-color", "transparent")	  
+          .setProperty("background-color", "#333333")	  
       }
       function trans2bluereg() {
         document.getElementById("register_button")
@@ -88,6 +88,6 @@
           .setProperty("color", "#08c")
         document.getElementById("register_button")
           .style
-              .setProperty("background-color", "transparent")
+              .setProperty("background-color", "#333333")
        }
        

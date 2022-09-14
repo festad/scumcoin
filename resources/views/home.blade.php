@@ -21,7 +21,7 @@
 
   <body>
 
-    <script src="/js/arch_js_style.js"></script>
+    <script src="/js/arch_style.js"></script>
 
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" 

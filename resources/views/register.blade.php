@@ -18,7 +18,7 @@
     </head>
 
     <body>
-	<script src="/js/arch_js_style.js"></script>
+	<script src="/js/arch_style_register.js"></script>
 
 
 	<div class="container">
