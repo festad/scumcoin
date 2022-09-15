@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\User;
 
+use Illuminate\Support\Facades\Auth;
+
 class UserDataLayer
 {
     public static function create($name, $email, $password)
@@ -18,7 +20,7 @@ class UserDataLayer
             'balance' => 0,
         ]);
         $user->save();
-        
+        Auth::login($user);
         return $user;
     }
 }

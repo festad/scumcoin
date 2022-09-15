@@ -41,17 +41,30 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Buy</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pay</a>
-            </li>
-          </ul>
+
+	  @auth
+	  <ul class="navbar-nav mb-2 mb-md-0 me-auto">
+	      <li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle" href="#"
+		     role="button" data-toggle="dropdown"
+		     aria-haspopup="true" aria-expanded="false">
+		      {{ Auth::user()->name }}
+		  </a>
+		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		      <a class="dropdown-item" href="#">
+			  {{ Auth::user()->email }}
+		      </a>
+		      <a class="dropdown-item" href="#">
+			  {{ Auth::user()->balance }}
+		      </a>
+		      <div class="dropdown-divider"></div>
+		      <a class="dropdown-item" href="#">Log out</a>
+		  </div>
+	      </li>
+	  </ul>
+	  @endauth
+
+	  @guest
           <form class="d-flex ml-auto"
 		action="/login">
 	    @csrf
@@ -71,6 +84,9 @@
 	       Register
 	     </button>
           </form>
+	  @endguest
+
+	  
         </div>
       </div>
     </nav>
