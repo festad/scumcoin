@@ -15,7 +15,7 @@
           href="/css/arch_style.css">
 
 
-    <title>Blockchain</title>
+    <title>Scumcoins</title>
   </head>
 
 

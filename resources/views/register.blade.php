@@ -44,7 +44,8 @@
 		
 		<div class="col">
 		    
-		    <form action="/register" method="POST">
+		    <form action="/register"
+			  method="POST">
 
 			@csrf
 

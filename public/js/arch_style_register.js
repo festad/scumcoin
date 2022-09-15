@@ -11,10 +11,7 @@
           .setProperty("border-color", "red", "important")
         document.getElementById("register_button")
           .style
-              .setProperty("color", "white")	  
-        document.getElementById("navbar_toggler")
-          .style
-          .setProperty("background-color", "red")     
+              .setProperty("color", "white")   
       }
 
       function red2blue(x) {
@@ -30,10 +27,7 @@
           .setProperty("border-color", "#08c", "important")   
         document.getElementById("register_button")
           .style
-              .setProperty("color", "#08c") 	  
-        document.getElementById("navbar_toggler")
-          .style
-          .setProperty("background-color", "#08c")                                        
+              .setProperty("color", "#08c")                                      
       }
 
       // REGISTER BUTTON 

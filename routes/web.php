@@ -22,9 +22,18 @@ Route::get('/',
 )->name('home');
 
 Route::get('/register',
-           [RegisterController::class, 'show']
+           [RegisterController::class, 'create']
 )->name('register');
+
+Route::get('/register/create',
+           [RegisterController::class, 'create']
+)->name('register');
+
+Route::post('/register',
+            [RegisterController::class, 'store']
+);
 
 Route::get('/login',
            [LoginController::class, 'show']
-)->name('register');
+)->name('login');
+
