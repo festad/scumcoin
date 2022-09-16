@@ -34,6 +34,11 @@ Route::get('/login',
            [LoginController::class, 'show']
 )->name('login');
 
+Route::post('/login',
+            [LoginController::class, 'authenticate']
+);
+
 Route::get('/logout',
            [LogoutController::class, 'logout']
-)->name('logout');
+)->middleware('auth')
+ ->name('logout');
