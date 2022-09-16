@@ -42,3 +42,7 @@ Route::get('/logout',
            [LogoutController::class, 'logout']
 )->middleware('auth')
  ->name('logout');
+
+Route::get('/user/{pubkey}/pay', function($pubkey) {
+    return $pubkey;
+})->name('pay');

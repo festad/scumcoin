@@ -58,6 +58,11 @@
 			  {{ Auth::user()->balance }}
 		      </a>
 		      <div class="dropdown-divider"></div>
+		      <a class="dropdown-item"
+			 href={{ sprintf("/user/%s/pay", Auth::user()->pubkey) }}>
+			  Pay
+		      </a>
+		      <div class="dropdown-divider"></div>
 		      <a class="dropdown-item" href="/logout">Log out</a>
 		  </div>
 	      </li>
