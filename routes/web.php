@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PayController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,12 @@ Route::get('/logout',
 )->middleware('auth')
  ->name('logout');
 
-Route::get('/user/{pubkey}/pay', function($pubkey) {
-    return $pubkey;
-})->name('pay');
+Route::get('/user/{pubkey}/pay',
+           [PayController::class, 'show']
+)->middleware('auth')
+  ->name('pay');
+
+Route::post('/user/{pubkey}/pay', function() {
+    return 'User '.$pubkey. ' payed!';
+}
+)->middleware('auth');
