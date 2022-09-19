@@ -103,6 +103,7 @@
 	  <th scope="col">Sender</th>
 	  <th scope="col">Receiver</th>
 	  <th scope="col">Amount</th>
+	  <th scope="col">Time</th>
 	</tr>
       </thead>
       @foreach ($transactions as $transaction)
@@ -111,6 +112,7 @@
 	  <td>{{ $transaction->sender }}</td>
 	  <td>{{ $transaction->receiver }}</td>
 	  <td>{{ $transaction->amount }}</td>
+	  <td>{{ $transaction->created_at }}</td>
 	</tr>
       </tbody>
       @endforeach
