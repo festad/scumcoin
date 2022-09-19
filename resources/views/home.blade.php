@@ -97,24 +97,38 @@
     </nav>
 
     
-    <table class="table">
-      <thead>
-	<tr>
-	  <th scope="col">Sender</th>
-	  <th scope="col">Receiver</th>
-	  <th scope="col">Amount</th>
-	  <th scope="col">Time</th>
-	</tr>
-      </thead>
-      @foreach ($transactions as $transaction)
-      <tbody>
-	<tr>
-	  <td>{{ $transaction->sender }}</td>
-	  <td>{{ $transaction->receiver }}</td>
-	  <td>{{ $transaction->amount }}</td>
-	  <td>{{ $transaction->created_at }}</td>
-	</tr>
-      </tbody>
+    <table class="table table-bordered">
+	<thead>
+	    <tr>
+		<th scope="col">Sender</th>
+		<th scope="col">Receiver</th>
+		<th scope="col">Amount</th>
+		<th scope="col">Time</th>
+	    </tr>
+	</thead>
+	@foreach ($transactions as $transaction)
+	    <tbody>
+		<tr>
+		    <td>
+			<a href={{ sprintf("/user/%s", $transaction->sender) }}
+			   class="link-secondary">
+			    {{ sprintf("%32.32s ...", $transaction->sender) }}
+			</a>
+		    </td>
+		    <td>
+			<a href={{ sprintf("/user/%s", $transaction->receiver) }}
+			   class="link-secondary">
+			    {{ sprintf("%32.32s ...", $transaction->receiver) }}
+			</a>
+		    </td>
+		    <td>
+			{{ $transaction->amount }}
+		    </td>
+		    <td>
+			{{ $transaction->created_at }}
+		    </td>
+		</tr>
+	    </tbody>
       @endforeach
     </table>
     
