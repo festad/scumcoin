@@ -30,7 +30,7 @@
 	       id="scumcoin_navbar">
 	    <div class="container-fluid">
 	      <a class="navbar-brand" href="/">
-		<img src="s_circle_blue.png" width="40" height="40" alt=""
+		<img src="/s_circle_blue.png" width="40" height="40" alt=""
 		     onmouseover="blue2red(this)"
 		     onmouseout="red2blue(this)">
 	      </a>

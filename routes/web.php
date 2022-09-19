@@ -50,7 +50,7 @@ Route::get('/user/{pubkey}/pay',
 )->middleware('auth')
   ->name('pay');
 
-Route::post('/user/{pubkey}/pay', function() {
+Route::post('/user/{pubkey}/pay', function($pubkey) {
     return 'User '.$pubkey. ' payed!';
 }
 )->middleware('auth');

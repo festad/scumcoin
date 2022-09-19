@@ -11,14 +11,14 @@
 	      crossorigin="anonymous">
 
 	<link rel="stylesheet"
-              href="/css/arch_style.css">
+              href="/css/arch_style_pay.css">
 
 	<title>Pay</title>
 
     </head>
 
     <body>
-	<script src="/js/arch_style_pay.js"></script> // TODO !!
+	<script src="/js/arch_style_pay.js"></script>
 
 
 	<div class="container">
@@ -26,8 +26,8 @@
 	    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" 
 		 id="scumcoin_navbar">
 		<div class="container-fluid">
-		    <a class="navbar-brand" href="#">
-			<img src="s_circle_blue.png" width="40" height="40" alt=""
+		    <a class="navbar-brand" href="/">
+			<img src="/s_circle_blue.png" width="40" height="40" alt=""
 			     onmouseover="blue2red(this)"
 			     onmouseout="red2blue(this)">
 		    </a>
@@ -99,7 +99,6 @@
 		
 		<div class="col">
 
-		    // TODO !!
 		    <form method="POST" action={{ sprintf("/user/%s/pay", Auth::user()->pubkey) }}>
 
 			@csrf
@@ -108,13 +107,18 @@
 			
 			    <div class="form-group">
 				<label for="pubkey">Receiver</label>
-				<select id="email"
-				    class="form-control"
-					id="pubkey">
+				<input id="pubkey"
+				       type="text"
+				       class="form-control"
+				       placeholder="Public key"
+				       list="pubkeys"
+				       id="pubkey">
+				<datalist id="pubkeys">
 				    @foreach ($users as $user)
 					<option>{{ $user->pubkey }}</option>
 				    @endforeach
-				</select>
+				</datalist>
+				</input>
 			    </div>
 			</div>	    
 

@@ -1,5 +1,5 @@
       function blue2red(x) {
-          x.src = "s_circle_red.png"
+          x.src = "/s_circle_red.png"
         document.getElementById("scumcoin_navbar")
           .style
           .borderBottomColor = "red"
@@ -27,7 +27,7 @@
       }
 
       function red2blue(x) {
-        x.src = "s_circle_blue.png"
+        x.src = "/s_circle_blue.png"
         document.getElementById("scumcoin_navbar")
           .style
           .borderBottomColor = "#08c"
