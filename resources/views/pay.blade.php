@@ -99,16 +99,21 @@
 		
 		<div class="col">
 
-		    <form method="POST" action={{ sprintf("/user/%s/pay", Auth::user()->pubkey) }}>
+		    <form method="POST" action="/pay">
 
 			@csrf
+
+			<input type="hidden"
+			       name="pubkey_sender"
+			       value={{ Auth::user()->pubkey }}>
 
 			<div class="form-row justify-content-center">
 			
 			    <div class="form-group">
 				<label for="pubkey">Receiver</label>
-				<input id="pubkey"
+				<input id="pubkey_receiver"
 				       type="text"
+				       name="pubkey_receiver"
 				       class="form-control"
 				       placeholder="Public key"
 				       list="pubkeys"

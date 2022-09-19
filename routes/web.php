@@ -50,7 +50,6 @@ Route::get('/user/{pubkey}/pay',
 )->middleware('auth')
   ->name('pay');
 
-Route::post('/user/{pubkey}/pay', function($pubkey) {
-    return 'User '.$pubkey. ' payed!';
-}
+Route::post('/pay',
+            [PayController::class, 'execute_payment']
 )->middleware('auth');
