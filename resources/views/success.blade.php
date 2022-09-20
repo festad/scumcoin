@@ -21,7 +21,7 @@
 
     <body>
 
-	<script src="/js/arch_style.js"></script>
+	<script src="/js/arch_style_success.js"></script>
 
 
       <div class="row">
@@ -41,11 +41,24 @@
 	</div>
       </div>
 
-	<div class="justify-content-center">
+      <form action="/">
+	  @csrf
+	  
+	<div class="form row justify-content-center">
 	    <div class="alert alert-success" role="alert">
 		{{ sprintf("%f scumcoins payed to %s", $amount, $pubkey ) }}
 	    </div>
 	</div>
+	<div class="form-row justify-content-center">
+	    <button class="btn btn-primary"
+		    type="submit"
+		    id="back_home_button"
+		    onmouseover="trans2bluelog()"
+		    onmouseout="blue2translog()">
+		Home
+	    </button>
+	</div>
+      </form>
 	
 
 	<!-- Optional JavaScript -->

@@ -29,3 +29,10 @@ body {
     color: #08c;
     margin-right: 10px;
 }
+
+#back_home_button {
+    background-color: #333333;
+    border-color: #08c !important;
+    border: 3px solid;
+    color: #08c;
+}
