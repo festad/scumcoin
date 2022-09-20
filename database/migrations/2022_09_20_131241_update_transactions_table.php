@@ -13,13 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
-        $table->id();
-	    $table->string('sender');
-	    $table->string('receiver');
-	    $table->decimal('amount', $precision = 32, $scale = 16);
-        $table->timestamps();
-        });
+        // Schema::table('transactions', TODO!!!
     }
 
     /**
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        //
     }
 };

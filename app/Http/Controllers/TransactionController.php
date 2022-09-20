@@ -44,6 +44,7 @@ class TransactionController extends Controller
             'amount' => $amount,
         ]);
         $transaction->save();
+        return $transaction;
     }
 
     /**

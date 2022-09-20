@@ -39,12 +39,16 @@ class PayController extends Controller
         }
         
         
-        TransactionController::store($request);
+        $transaction = TransactionController::store($request);
         $sender->balance = $sender->balance - $request->amount;
         $receiver->balance = $receiver->balance + $request->amount;
 
         $sender->save();
         $receiver->save();
+
+        $sender->transactions()->save($transaction);
+        $receiver->transactions()->save($transaction);
+        
 
         return redirect('/');
     }
