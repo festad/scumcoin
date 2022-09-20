@@ -11,6 +11,10 @@ body {
     background-color: #333333 !important;
 }
 
+#navbar_toggler {
+    background-color: #08c;
+}
+
 #pay_button {
     background-color: #333333;
     border-color: #08c !important;

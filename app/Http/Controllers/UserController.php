@@ -49,9 +49,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $pubkey = $request->pubkey;
+        $user = User::where('pubkey', $pubkey)->firstOrFail();
+        return view('user', [
+            'user' => $user
+        ]);
     }
 
     /**

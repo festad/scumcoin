@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayController;
 
 
@@ -49,6 +50,11 @@ Route::get('/user/{pubkey}/pay',
            [PayController::class, 'show']
 )->middleware('auth')
   ->name('pay');
+
+Route::get('/user/{pubkey}',
+           [UserController::class, 'show']
+)->name('user');
+
 
 Route::post('/pay',
             [PayController::class, 'execute_payment']
