@@ -18,9 +18,13 @@ class PayController extends Controller
         if ($request->pubkey != Auth::user()->pubkey) {
             return redirect('/');
         }
+
+        $otherUsers = User::whereNotIn('pubkey',
+                                       [Auth::user()->pubkey])
+                    ->get();
         
         return view('pay', [
-            'users' => User::all()
+            'otherUsers' => $otherUsers
         ]);
     }
 
@@ -29,13 +33,21 @@ class PayController extends Controller
             abort(401); // NON AUTHORIZED!
         }
 
+        if ($request->pubkey_receiver == Auth::user()->pubkey) {
+            abort(401); // CAN'T PAY TO MYSELF!
+        }
+
         $sender = User::where('pubkey',
                              $request->pubkey_sender)->firstOrFail();
         $receiver = User::where('pubkey',
                                $request->pubkey_receiver)->firstOrFail();
 
         if ($sender->balance < $request->amount) {
-            abort(401);
+            abort(401); // CAN'T SPEND MORE THAN I HAVE!
+        }
+
+        if ($request->amount <= 0) {
+            abort(401); // CAN'T SPEND NEGATIVE AMOUNT OF SCUMCOIN!
         }
         
         
@@ -50,7 +62,8 @@ class PayController extends Controller
         $receiver->transactions()->save($transaction);
         
 
-        return redirect('/');
+        return view('success', ['pubkey' => $receiver->pubkey,
+                                'amount' => $request->amount]);
     }
         
 }

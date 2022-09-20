@@ -53,6 +53,7 @@ class UserController extends Controller
     {
         $pubkey = $request->pubkey;
         $user = User::where('pubkey', $pubkey)->firstOrFail();
+        $transactions = $user->transactions();
         return view('user', [
             'user' => $user
         ]);

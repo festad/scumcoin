@@ -128,7 +128,11 @@
 	    </tbody>
 	</table>
 
+	
 	<table class="table">
+	    <thead>
+		<th colspan="5">Transactions</th>
+	    </thead>
 	    <tbody>
 		@foreach($user->transactions as $transaction)
 		    <tr>
