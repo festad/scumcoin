@@ -99,7 +99,7 @@
 		
 		<div class="col">
 
-		    <form method="POST" action="/pay">
+		    <form method="POST" action="/pay/confirm">
 
 			@csrf
 
@@ -145,8 +145,7 @@
 				    type="submit"
 				    id="pay_button"
 				    onmouseover="trans2bluelog()"
-				    onmouseout="blue2translog()"
-				    onclick="confirm_payment()">
+				    onmouseout="blue2translog()">
 				Pay
 			    </button>
 			</div>

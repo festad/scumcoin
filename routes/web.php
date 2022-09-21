@@ -56,6 +56,10 @@ Route::get('/user/{pubkey}',
 )->name('user');
 
 
+Route::post('/pay/confirm',
+            [PayController::class, 'confirm']
+)->middleware('auth');
+
 Route::post('/pay',
             [PayController::class, 'execute_payment']
 )->middleware('auth');

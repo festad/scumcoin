@@ -36,3 +36,18 @@ body {
     border: 3px solid;
     color: #08c;
 }
+
+#confirm_button {
+    background-color: #333333;
+    border-color: #08c !important;
+    border: 3px solid;
+    color: #08c;
+}
+
+#cancel_button {
+    background-color: #333333;
+    border-color: #08c !important;
+    border: 3px solid;
+    color: #08c;
+}
+

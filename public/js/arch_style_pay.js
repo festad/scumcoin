@@ -50,6 +50,6 @@ function blue2translog() {
         .setProperty("background-color", "#333333")	  
 }
 
-function confirm_payment() {
-    confirm("Confirm to complete the payment.")
-}
+// function confirm_payment() {
+//     confirm("Confirm to complete the payment.")
+// }

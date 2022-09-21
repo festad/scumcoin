@@ -28,6 +28,15 @@ class PayController extends Controller
         ]);
     }
 
+    public function confirm(Request $request)
+    {
+        return view('confirm', [
+            'pubkey_sender' => $request->pubkey_sender,
+            'pubkey_receiver' => $request->pubkey_receiver,
+            'amount' => $request->amount
+        ]);
+    }
+
     public function execute_payment(Request $request) {
         if ($request->pubkey_sender != Auth::user()->pubkey) {
             abort(401); // NON AUTHORIZED!
