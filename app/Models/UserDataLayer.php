@@ -18,6 +18,7 @@ class UserDataLayer
             'pubkey' => $pubkey,
             'password' => $h_password,
             'balance' => 0,
+            'power' => 'normal',
         ]);
         $user->save();
         Auth::login($user);

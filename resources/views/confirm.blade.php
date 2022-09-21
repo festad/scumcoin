@@ -65,7 +65,8 @@
 					id="cancel_button"
 					onmouseover="trans2bluecanc()"
 					onmouseout="blue2transcanc()"
-					style="margin-right: 10px;">
+					style="margin-right: 10px;"
+					formaction="/">
 				    Cancel
 				</button>
 				<button class="btn btn-primary"

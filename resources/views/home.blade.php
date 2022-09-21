@@ -66,6 +66,31 @@
 		      <a class="dropdown-item" href="/logout">Log out</a>
 		  </div>
 	      </li>
+	      @if(Auth::user()->power === "admin")
+	      <li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle" href="#"
+		     role="button" data-toggle="dropdown"
+		     aria-haspopup="true" aria-expanded="false">
+		      Administration
+		  </a>
+		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		      <a class="dropdown-item" href="#">
+			  Create
+		      </a>
+		      <a class="dropdown-item" href="#">
+			  Ban
+		      </a>
+		      <a class="dropdown-item"
+			 href="#">
+			  Investigate
+		      </a>
+		      <div class="dropdown-divider"></div>
+		      <a class="dropdown-item" href="/logout">
+			  Log out
+		      </a>
+		  </div>
+	      </li>
+	      @endif
 	  </ul>
 	  @endauth
 

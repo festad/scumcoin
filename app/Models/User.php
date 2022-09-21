@@ -25,6 +25,7 @@ class User extends Authenticatable
         'pubkey',
         'password',
         'balance',
+        'power',
     ];
 
     /**

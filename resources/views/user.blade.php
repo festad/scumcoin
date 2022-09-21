@@ -102,7 +102,8 @@
 		<tr>
 		    <th scope="col">Public key</th>
 		    @if(Auth::check())
-			@if(Auth::user()->pubkey === $user->pubkey)
+			@if(Auth::user()->pubkey === $user->pubkey
+			    || Auth::user()->power === "admin")
 			    <th scope="col">Email</th>
 			@endif
 		    @endif
@@ -115,7 +116,8 @@
 			{{ $user->pubkey }}
 		    </td>
 		    @if(Auth::check())
-			@if(Auth::user()->pubkey === $user->pubkey)
+			@if(Auth::user()->pubkey === $user->pubkey
+			    || Auth::user()->power === "admin")
 			    <td>
 				{{ $user->email }}
 			    </td>
