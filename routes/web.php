@@ -8,6 +8,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayController;
+use App\Http\Controllers\AdminController;
+
 
 
 /*
@@ -63,3 +65,7 @@ Route::post('/pay/confirm',
 Route::post('/pay',
             [PayController::class, 'execute_payment']
 )->middleware('auth');
+
+Route::get('/admin/dashboard',
+           [AdminController::class, 'show_dash']
+);

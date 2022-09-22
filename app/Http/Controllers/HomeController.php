@@ -13,7 +13,9 @@ class HomeController extends Controller
 	    return view('home', [
             'transactions' => DB::table('transactions')
             ->orderBy('created_at', 'desc')
-            ->paginate(50)
+            ->paginate(10)
         ]);
+
+        
     }
 }

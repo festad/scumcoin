@@ -66,6 +66,25 @@
 				<a class="dropdown-item" href="/logout">Log out</a>
 			    </div>
 			</li>
+			@if(Auth::user()->power === "admin")
+			    <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#"
+				   role="button" data-toggle="dropdown"
+				   aria-haspopup="true" aria-expanded="false">
+				    Administration
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				    <a class="dropdown-item"
+				       href="/admin/dashboard">
+					Dashboard
+				    </a>
+				    <div class="dropdown-divider"></div>
+				    <a class="dropdown-item" href="/logout">
+					Log out
+				    </a>
+				</div>
+			    </li>
+			@endif
 		    </ul>
 		    @endauth
 
@@ -82,10 +101,10 @@
 			</button>
 			
 			<button class="btn btn-outline-success" 
-				       type="submit" id="register_button"
-				       onmouseover="trans2bluereg()"
-				       onmouseout="blue2transreg()"
-				       formaction="/register">
+				type="submit" id="register_button"
+				onmouseover="trans2bluereg()"
+				onmouseout="blue2transreg()"
+				formaction="/register">
 			    Register
 			</button>
 		    </form>
@@ -99,104 +118,47 @@
 	<div class="container-fluid">
 	    <div class="row justify-content-center">
 		<div class="col">
-		    <table class="table">
+
+		    <table class="table table-bordered">
 			<thead>
 			    <tr>
 				<th scope="col">Public key</th>
-				@if(Auth::check())
-				    @if(Auth::user()->pubkey === $user->pubkey
-					|| Auth::user()->power === "admin")
-					<th scope="col">Email</th>
-				    @endif
-				@endif
+				<th scope="col">Email</th>
 				<th scope="col">Balance</th>
+				<th scope="col">Registration date</th>
 			    </tr>
 			</thead>
-			<tbody>
-			    <tr>
-				<td>
-				    {{ $user->pubkey }}
-				</td>
-				@if(Auth::check())
-				    @if(Auth::user()->pubkey === $user->pubkey
-					|| Auth::user()->power === "admin")
-					<td>
-					    {{ $user->email }}
-					</td>
-				    @endif
-				@endif
-				<td>
-				    {{ $user->balance }}
-				</td>
-			    </tr>
-			</tbody>
-		    </table>
-
-		    
-		    <table class="table">
-			<thead>
-			    <th colspan="5">Transactions</th>
-			</thead>
-			<tbody>
-			    @foreach($transactions as $transaction)
+			@foreach ($users as $user)
+			    <tbody>
 				<tr>
 				    <td>
-					<a href={{ sprintf("/user/%s", $user->pubkey) }}
+					<a href={{ sprintf("/user/%s",
+							   $user->pubkey) }}
 					   class="link-secondary">
-					    {{ sprintf("%32.32s ...", $user->pubkey) }}
+					    {{ sprintf("%32.32s ...",
+						       $user->pubkey) }}
 					</a>
 				    </td>
-				    @if($transaction->sender == $user->pubkey)
-					<td>
-					    <svg xmlns="http://www.w3.org/2000/svg"
-						 width="16" height="16"
-						 fill="red" class="bi bi-arrow-right" viewBox="0 0 16 16">
-						<path fill-rule="evenodd"
-						      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-					    </svg>
-					</td>
-					<td>
-					    <a href={{ sprintf("/user/%s", $transaction->receiver) }}
-					       class="link-secondary">
-						{{ sprintf("%32.32s ...", $transaction->receiver) }}
-					    </a>
-					</td>
-					<td>
-					    {{ sprintf("- %f", $transaction->amount) }}
-					</td>
-				    @else
-					<td>
-					    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						 fill="green" class="bi bi-arrow-left" viewBox="0 0 16 16">
-						<path fill-rule="evenodd"
-						      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-					    </svg>
-					</td>
-					<td>
-					    <a href={{ sprintf("/user/%s", $transaction->sender) }}
-					       class="link-secondary">
-						{{ sprintf("%32.32s ...", $transaction->sender) }}
-					    </a>
-					</td>
-					<td>
-					    {{ sprintf("+ %f", $transaction->amount) }}
-					</td>
-				    @endif
 				    <td>
-					{{ $transaction->created_at }}
+					{{ sprintf("%32.32s ...",
+						   $user->email) }}
+				    </td>
+				    <td>
+					{{ $user->balance }}
+				    </td>
+				    <td>
+					{{ $user->created_at }}
 				    </td>
 				</tr>
-			    @endforeach
-			</tbody>
+			    </tbody>
+			@endforeach
 		    </table>
+
+		    {{ $users->links() }}
 
 		</div>
 	    </div>
 	</div>
-	
-	    
-
-	{{ $transactions->links() }}
 	
 
 	<!-- Optional JavaScript -->

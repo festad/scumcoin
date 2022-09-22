@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" 
          id="scumcoin_navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img src="/s_circle_blue.png" width="40" height="40" alt=""
                onmouseover="blue2red(this)"
                onmouseout="red2blue(this)">
@@ -74,15 +74,8 @@
 		      Administration
 		  </a>
 		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		      <a class="dropdown-item" href="#">
-			  Create
-		      </a>
-		      <a class="dropdown-item" href="#">
-			  Ban
-		      </a>
-		      <a class="dropdown-item"
-			 href="#">
-			  Investigate
+		      <a class="dropdown-item" href="/admin/dashboard">
+			  Dashboard
 		      </a>
 		      <div class="dropdown-divider"></div>
 		      <a class="dropdown-item" href="/logout">
@@ -121,41 +114,47 @@
       </div>
     </nav>
 
-    
-    <table class="table table-bordered">
-	<thead>
-	    <tr>
-		<th scope="col">Sender</th>
-		<th scope="col">Receiver</th>
-		<th scope="col">Amount</th>
-		<th scope="col">Time</th>
-	    </tr>
-	</thead>
-	@foreach ($transactions as $transaction)
-	    <tbody>
-		<tr>
-		    <td>
-			<a href={{ sprintf("/user/%s", $transaction->sender) }}
-			   class="link-secondary">
-			    {{ sprintf("%32.32s ...", $transaction->sender) }}
-			</a>
-		    </td>
-		    <td>
-			<a href={{ sprintf("/user/%s", $transaction->receiver) }}
-			   class="link-secondary">
-			    {{ sprintf("%32.32s ...", $transaction->receiver) }}
-			</a>
-		    </td>
-		    <td>
-			{{ $transaction->amount }}
-		    </td>
-		    <td>
-			{{ $transaction->created_at }}
-		    </td>
-		</tr>
-	    </tbody>
-      @endforeach
-    </table>
+    <div class="container-fluid">
+	<div class="row justify-content-center">
+	    <div class="col">
+		<table class="table table-bordered">
+		    <thead>
+			<tr>
+			    <th scope="col">Sender</th>
+			    <th scope="col">Receiver</th>
+			    <th scope="col">Amount</th>
+			    <th scope="col">Time</th>
+			</tr>
+		    </thead>
+		    @foreach ($transactions as $transaction)
+			<tbody>
+			    <tr>
+				<td>
+				    <a href={{ sprintf("/user/%s", $transaction->sender) }}
+				       class="link-secondary">
+					{{ sprintf("%32.32s ...", $transaction->sender) }}
+				    </a>
+				</td>
+				<td>
+				    <a href={{ sprintf("/user/%s", $transaction->receiver) }}
+				       class="link-secondary">
+					{{ sprintf("%32.32s ...", $transaction->receiver) }}
+				    </a>
+				</td>
+				<td>
+				    {{ $transaction->amount }}
+				</td>
+				<td>
+				    {{ $transaction->created_at }}
+				</td>
+			    </tr>
+			</tbody>
+		    @endforeach
+		</table>
+	    </div>
+	</div>
+
+    {{ $transactions->links() }}
     
 
     <!-- Optional JavaScript -->
