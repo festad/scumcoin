@@ -132,6 +132,65 @@
 			</tbody>
 		    </table>
 
+		    <form action="/delete/confirm"
+			  method="POST">
+
+			@csrf
+
+			<div class="form-row">
+			    <!-- Name -->
+			    <div class="form-group">
+				@if(Auth::check())
+				    @if($user->pubkey === Auth::user()->pubkey
+					|| Auth::user()->power === 'admin')
+					
+					<button id="delete_button"
+						class="btn-primary"
+						type="submit"
+						onmouseover="trans2bluedel()"
+						    onmouseout="blue2transdel()">
+					    Delete
+					</button>
+					
+					<input type="hidden"
+					       name="pubkey"
+					       value={{ $user->pubkey }}>
+				    @endif
+				@endif
+
+				
+			    </div>
+			</div>
+		    </form>
+
+		    <form action={{ sprintf("/user/%s/pay",
+					    Auth::user()->pubkey) }}
+			  method="GET">
+
+			@csrf
+
+			<div class="form-row">
+			    <!-- Name -->
+			    <div class="form-group">
+				@if(Auth::check())
+
+				    <button id="pay_user_button"
+					    class="btn-primary"
+					    type="submit"
+					    onmouseover="trans2bluepay()"
+					    onmouseout="blue2transpay()">
+					Pay
+				    </button>
+				    
+				    <input type="hidden"
+					   name="to_pubkey"
+					   value={{ $user->pubkey }}>
+				@endif
+
+				
+			    </div>
+			</div>
+		    </form>
 		    
 		    <table class="table">
 			<thead>

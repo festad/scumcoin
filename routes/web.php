@@ -27,6 +27,10 @@ Route::get('/',
            [HomeController::class, 'show']
 )->name('home');
 
+Route::post('/',
+            [HomeController::class, 'show']
+)->name('home');
+
 Route::get('/register',
            [RegisterController::class, 'create']
 )->name('register');
@@ -56,6 +60,15 @@ Route::get('/user/{pubkey}/pay',
 Route::get('/user/{pubkey}',
            [UserController::class, 'show']
 )->name('user');
+
+Route::post('/delete/confirm',
+            [UserController::class, 'confirm']
+)->middleware('auth');
+
+
+Route::post('/delete',
+            [UserController::class, 'execute_deletion']
+)->middleware('auth');
 
 
 Route::post('/pay/confirm',

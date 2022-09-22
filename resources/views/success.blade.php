@@ -21,7 +21,7 @@
 
     <body>
 
-	<script src="/js/arch_style_success.js"></script>
+	<script src="/js/arch_style.js"></script>
 
 
       <div class="row">
@@ -53,8 +53,8 @@
 	    <button class="btn btn-primary"
 		    type="submit"
 		    id="back_home_button"
-		    onmouseover="trans2bluelog()"
-		    onmouseout="blue2translog()">
+		    onmouseover="trans2bluebh()"
+		    onmouseout="blue2transbh()">
 		Home
 	    </button>
 	</div>

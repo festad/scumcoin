@@ -44,7 +44,7 @@
 		
 		<div class="col">
 		    
-		    <form method="POST" action="/pay">
+		    <form method="POST" action="/delete">
 
 			@csrf
 			
@@ -52,8 +52,8 @@
 			    <div class="form row justify-content-center">
 				<div class="alert alert-danger" role="alert">
 				    {{ sprintf(
-					"%f scumcoins are going to be sent to %s",
-					$amount, $pubkey_receiver) }}
+					"User %s (%s) is going to be deleted",
+					$pubkey, $email) }}
 				</div>
 			    </div>
 			</div>
@@ -61,30 +61,27 @@
 			<div class="form-row justify-content-center">
 			    <div class="form-group row">
 				<button class="btn btn-primary"
-					type="submit"
-					id="cancel_button"
-					onmouseover="trans2bluecanc()"
-					onmouseout="blue2transcanc()"
-					style="margin-right: 10px;"
-					formaction="/">
+					       type="submit"
+					       id="cancel_button"
+					       onmouseover="trans2bluecanc()"
+					       onmouseout="blue2transcanc()"
+					       style="margin-right: 10px;"
+					       formaction="/">
 				    Cancel
 				</button>
 				<button class="btn btn-primary"
-					type="submit"
-					id="confirm_button"
-					onmouseover="trans2blueconf()"
-					onmouseout="blue2transconf()">
+					       type="submit"
+					       id="confirm_button"
+					       onmouseover="trans2blueconf()"
+					       onmouseout="blue2transconf()">
 				    Confirm
 				</button>
 				<input type="hidden"
-				       name="pubkey_sender"
-				       value={{ Auth::user()->pubkey }}>
+				       name="pubkey"
+				       value={{ $pubkey }}>
 				<input type="hidden"
-				       name="pubkey_receiver"
-				       value={{ $pubkey_receiver }}>
-				<input type="hidden"
-				       name="amount"
-				       value={{ $amount }}>
+				       name="email"
+				       value={{ $email }}>
 			    </div>
 			</div>
 		    </form>
@@ -96,16 +93,16 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous">
+		     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		     crossorigin="anonymous">
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-		     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		     crossorigin="anonymous">
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous">
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-		     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		     crossorigin="anonymous">
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous">
 	</script>
     </body>
 </html>

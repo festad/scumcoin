@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\UserDataLayer;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -83,14 +85,38 @@ class UserController extends Controller
         //
     }
 
+
+    public function confirm(Request $request)
+    {
+        $user = User::where('pubkey', $request->pubkey)->firstOrFail();
+        $email = $user->email;
+        
+        return view('confirm_deletion', [
+            'pubkey' => $request->pubkey,
+            'email' => $email
+        ]);
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public static function execute_deletion(Request $request)
     {
-        //
+        if ($request->pubkey != Auth::user()->pubkey &&
+            Auth::user()->power != 'admin')
+        {
+            abort(401);
+        }
+
+        $user = User::where('pubkey',
+                            $request->pubkey)->firstOrFail();
+        $email = $user->email;
+        $user->delete();
+
+        return view('success_deletion', ['pubkey' => $request->pubkey,
+                                         'email' => $email]);
     }
 }

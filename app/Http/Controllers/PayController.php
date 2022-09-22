@@ -24,7 +24,8 @@ class PayController extends Controller
                     ->get();
         
         return view('pay', [
-            'otherUsers' => $otherUsers
+            'otherUsers' => $otherUsers,
+            'to_pubkey' => $request->to_pubkey
         ]);
     }
 

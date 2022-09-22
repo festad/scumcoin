@@ -11,14 +11,14 @@
 	      crossorigin="anonymous">
 
 	<link rel="stylesheet"
-              href="/css/arch_style_pay.css">
+              href="/css/arch_style.css">
 
 	<title>Pay</title>
 
     </head>
 
     <body>
-	<script src="/js/arch_style_pay.js"></script>
+	<script src="/js/arch_style.js"></script>
 
 
 	<div class="container">
@@ -116,6 +116,9 @@
 				       name="pubkey_receiver"
 				       class="form-control"
 				       placeholder="Public key"
+				       @if(!is_null($to_pubkey))
+				       value={{ $to_pubkey }}
+				       @endif
 				       list="pubkeys"
 				       id="pubkey">
 				<datalist id="pubkeys">
@@ -144,8 +147,8 @@
 			    <button class="btn btn-primary"
 				    type="submit"
 				    id="pay_button"
-				    onmouseover="trans2bluelog()"
-				    onmouseout="blue2translog()">
+				    onmouseover="trans2bluepaybut()"
+				    onmouseout="blue2transpaybut()">
 				Pay
 			    </button>
 			</div>
