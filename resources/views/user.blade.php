@@ -132,65 +132,78 @@
 			</tbody>
 		    </table>
 
-		    <form action="/delete/confirm"
-			  method="POST">
+		    <div class="row">
 
-			@csrf
+			<div class="col-2">
 
-			<div class="form-row">
-			    <!-- Name -->
-			    <div class="form-group">
-				@if(Auth::check())
-				    @if($user->pubkey === Auth::user()->pubkey
-					|| Auth::user()->power === 'admin')
-					
-					<button id="delete_button"
+			    @if(Auth::check())
+				<form action={{ sprintf("/user/%s/pay",
+							Auth::user()->pubkey) }}
+				      method="GET">
+
+				@csrf
+
+				<div class="form-row">
+				    <!-- Name -->
+				    <div class="form-group">
+
+					<button id="pay_user_button"
 						class="btn-primary"
 						type="submit"
-						onmouseover="trans2bluedel()"
-						    onmouseout="blue2transdel()">
-					    Delete
+						onmouseover="trans2bluepay()"
+						onmouseout="blue2transpay()">
+					    Pay
 					</button>
 					
 					<input type="hidden"
-					       name="pubkey"
+					       name="to_pubkey"
 					       value={{ $user->pubkey }}>
-				    @endif
-				@endif
 
-				
-			    </div>
+					
+				    </div>
+				</div>
+				</form>
+			    @endif
+
 			</div>
-		    </form>
+			
+			<div class="col-2">
 
-		    <form action={{ sprintf("/user/%s/pay",
-					    Auth::user()->pubkey) }}
-			  method="GET">
+			    <form action="/delete/confirm"
+				  method="POST">
 
-			@csrf
+				@csrf
 
-			<div class="form-row">
-			    <!-- Name -->
-			    <div class="form-group">
-				@if(Auth::check())
+				<div class="form-row">
+				    <!-- Name -->
+				    <div class="form-group">
+					@if(Auth::check())
+					    @if($user->pubkey === Auth::user()->pubkey
+						|| Auth::user()->power === 'admin')
+						
+						<button id="delete_button"
+							    class="btn-primary"
+							    type="submit"
+							    onmouseover="trans2bluedel()"
+							onmouseout="blue2transdel()">
+						    Delete
+						</button>
+						
+						<input type="hidden"
+						       name="pubkey"
+						       value={{ $user->pubkey }}>
+					    @endif
+					@endif
 
-				    <button id="pay_user_button"
-					    class="btn-primary"
-					    type="submit"
-					    onmouseover="trans2bluepay()"
-					    onmouseout="blue2transpay()">
-					Pay
-				    </button>
-				    
-				    <input type="hidden"
-					   name="to_pubkey"
-					   value={{ $user->pubkey }}>
-				@endif
+					
+				    </div>
+				</div>
+			    </form>
 
-				
-			    </div>
 			</div>
-		    </form>
+
+			
+		    </div>
 		    
 		    <table class="table">
 			<thead>
