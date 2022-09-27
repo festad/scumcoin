@@ -23,13 +23,15 @@
              id="scumcoin_navbar">
 	    <div class="container-fluid">
 		<a class="navbar-brand" href="/">
-		    <img id="logo" src="/s_circle_blue.png" width="40" height="40" alt=""
-			 onmouseover="blue2red(this)"
-			 onmouseout="red2blue(this)">
+		    <img id="logo"
+			 src="/s_circle_blue.png"
+			 width="40" height="40" alt="">
 		</a>
 
-		<button class="navbar-toggler arch" type="button" data-bs-toggle="collapse" 
-			data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" 
+		<button class="navbar-toggler arch"
+			type="button" data-bs-toggle="collapse" 
+			       data-bs-target="#navbarCollapse"
+			aria-controls="navbarCollapse" 
 			aria-expanded="false" aria-label="Toggle navigation"
 			id="navbar_toggler">
 		    <span class="navbar-toggler-icon"></span>
@@ -88,16 +90,12 @@
 			@csrf
 			<!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
 			<button class="btn btn-outline-success arch" 
-				type="submit" id="login_button"
-				onmouseover="trans2bluelog()"
-				onmouseout="blue2translog()">
+				type="submit" id="login_button">
 			    Login
 			</button>
 			
 			<button class="btn btn-outline-success arch" 
 				type="submit" id="register_button"
-				onmouseover="trans2bluereg()"
-				onmouseout="blue2transreg()"
 				formaction="/register">
 			    Register
 			</button>
@@ -152,7 +150,8 @@
 	    {{ $transactions->links() }}
 
 
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> 
+	    <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> 
 	    
 	    <script>
 	     $('body').css({
@@ -174,18 +173,38 @@
 		 'color': '#08c'
 	     });
 
+	     $('#login_button').css({
+		 'margin-right': '10px'
+	     });
+
 	     $('#logo').on('mouseover', function() {
 		 $(this).attr("src","/s_circle_red.png");
-		 $('button').css({
+		 $('.arch').css({
 		     'background-color': 'red',
 		     'border-color': 'red',
-		     'color': 'white'
+		     'color': 'white',
 		 });
 	     });
 
 	     $('#logo').on('mouseout', function() {
-		 $(this).attr("src","/s_circle_red.png");
-		 $('button').css({
+		 $(this).attr("src","/s_circle_blue.png");
+		 $('.arch').css({
+		     'background-color': '#333333',
+		     'border-color': '#08c',
+		     'color': '#08c'
+		 });
+	     });
+
+	     $('button').on('mouseover', function() {
+		 $(this).css({
+		     'background-color': '#08c',
+		     'border-color': '#08c',
+		     'color': 'white'
+		 });
+	     });
+
+	     $('button').on('mouseout', function() {
+		 $(this).css({
 		     'background-color': '#333333',
 		     'border-color': '#08c',
 		     'color': '#08c'

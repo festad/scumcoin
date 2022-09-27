@@ -11,9 +11,6 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
               crossorigin="anonymous">
 
-	<link rel="stylesheet"
-              href="/css/arch_style.css">
-
 
 	<title>Scumcoins</title>
     </head>
@@ -21,19 +18,17 @@
 
     <body>
 
-	<script src="/js/arch_style_success.js"></script>
-
-
 	<div class="row">
 	    <div class="col">
 		
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+		<nav class="navbar navbar-expand-md
+			    navbar-dark fixed-top bg-dark
+			    arch"
 		     id="scumcoin_navbar">
 		    <div class="container-fluid">
 			<a class="navbar-brand" href="/">
-			    <img src="/s_circle_blue.png" width="40" height="40" alt=""
-				 onmouseover="blue2red(this)"
-				 onmouseout="red2blue(this)">
+			    <img src="/s_circle_blue.png"
+				 id="logo" width="40" height="40" alt="">
 			</a>
 		    </div>
 		</nav>
@@ -51,23 +46,77 @@
 		</div>
 	    </div>
 	    <div class="form-row justify-content-center">
-		<button class="btn btn-primary"
-			type="submit"
-			id="back_home_button"
-			onmouseover="trans2bluelog()"
-			onmouseout="blue2translog()">
+		<button class="btn btn-primary arch"
+			       type="submit"
+			       id="back_home_button">
 		    Home
 		</button>
 	    </div>
 	</form>
+
+	<script
+	    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+	</script> 
 	
+	<script>
+	 $('body').css({
+	     'padding-top': '100px'
+	 });
+
+	 $('nav').css({
+	     'border-bottom': '5px',
+	     'border-bottom-width': '5px',
+	     'border-bottom-style': 'solid',
+	     'border-bottom-color': '#08c',
+	     'background-color': '#333333'
+	 });
+
+	 $('button').css({
+	     'background-color': '#333333',
+	     'border-color': '#08c',
+	     'border': '3px solid',
+	     'color': '#08c'
+	 });
+
+	 $('#logo').on('mouseover', function() {
+	     $(this).attr("src","/s_circle_red.png");
+	     $('.arch').css({
+		 'background-color': 'red',
+		 'border-color': 'red',
+		 'color': 'white',
+	     });
+	 });
+
+	 $('#logo').on('mouseout', function() {
+	     $(this).attr("src","/s_circle_blue.png");
+	     $('.arch').css({
+		 'background-color': '#333333',
+		 'border-color': '#08c',
+		 'color': '#08c'
+	     });
+	 });
+
+	 $('button').on('mouseover', function() {
+	     $(this).css({
+		 'background-color': '#08c',
+		 'border-color': '#08c',
+		 'color': 'white'
+	     });
+	 });
+
+	 $('button').on('mouseout', function() {
+	     $(this).css({
+		 'background-color': '#333333',
+		 'border-color': '#08c',
+		 'color': '#08c'
+	     });
+	 });
+	</script>
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		     crossorigin="anonymous">
-	</script>
+	
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
 		     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		     crossorigin="anonymous">
