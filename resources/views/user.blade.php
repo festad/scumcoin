@@ -295,7 +295,7 @@
 	 });
 
 	 $('button').css({
-	     'background-color': '#333333',
+	     'background-color': 'rgba(0,0,0,0)',
 	     'border-color': '#08c',
 	     'border': '3px solid',
 	     'color': '#08c'
@@ -348,7 +348,7 @@
 
 	 $('button').on('mouseout', function() {
 	     $(this).css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': '#08c',
 		 'color': '#08c'
 	     });
@@ -358,18 +358,18 @@
 	     $(this).attr("src","/s_circle_blue.png");
 
 	     $('.arch').css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': '#08c',
 		 'color': '#08c'
 	     });
 	     
 	     $('#delete_button').css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': 'red',
 		 'color': 'red',
 	     });
 	     $('#pay_user_button').css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': 'green',
 		 'color': 'green'
 	     });
@@ -385,7 +385,7 @@
 
 	 $('#pay_user_button').on('mouseout', function() {
 	     $(this).css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': 'green',
 		 'color': 'green'
 	     });
@@ -403,7 +403,7 @@
 	 $('#delete_button').on('mouseout', function() {
 	     color = $(this).css('border-color');
 	     $(this).css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': 'red',
 		 'color': 'red'
 	     });

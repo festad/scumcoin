@@ -188,7 +188,7 @@
 	     });
 
 	     $('button').css({
-		 'background-color': '#333333',
+		 'background-color': 'rgba(0,0,0,0)',
 		 'border-color': '#08c',
 		 'border': '3px solid',
 		 'color': '#08c'
@@ -210,7 +210,7 @@
 	     $('#logo').on('mouseout', function() {
 		 $(this).attr("src","/s_circle_blue.png");
 		 $('.arch').css({
-		     'background-color': '#333333',
+		     'background-color': 'rgba(0,0,0,0)',
 		     'border-color': '#08c',
 		     'color': '#08c'
 		 });
@@ -226,7 +226,7 @@
 
 	     $('button').on('mouseout', function() {
 		 $(this).css({
-		     'background-color': '#333333',
+		     'background-color': 'rgba(0,0,0,0)',
 		     'border-color': '#08c',
 		     'color': '#08c'
 		 });

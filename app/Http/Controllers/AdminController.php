@@ -21,7 +21,7 @@ class AdminController extends Controller
 
         $users = User::whereNotIn('power', ['admin'])
                ->orderBy('balance', 'desc')
-               ->paginate(10);
+               ->paginate(20);
 
         return view('admin_dash',
                     ['users' => $users]);

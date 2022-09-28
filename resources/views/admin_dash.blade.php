@@ -132,7 +132,7 @@
 					</a>
 				    </td>
 				    <td>
-					{{ sprintf("%32.32s ...",
+					{{ sprintf("%32.32s",
 						   $user->email) }}
 				    </td>
 				    <td>
