@@ -44,8 +44,10 @@
 		
 		<div class="col">
 		    
-		    <form action="/register"
-			  method="POST">
+		    <form
+			id="form_register"
+			action="/register"
+			method="POST">
 
 			@csrf
 
@@ -152,7 +154,7 @@
 			
 			<div class="form-row justify-content-center">
 			    <button class="btn btn-primary arch"
-				    type="submit"
+				    type="button"
 				    id="register_button">
 				Register
 			    </button>
@@ -161,64 +163,136 @@
 
 		    <script>
 
+		     $('#register_button').attr("type", "button");
+		     
+		     $('#register_button').on('click', function() {
+			 console.log('Complete the form!');
+		     });
+
 		     $('body').css({
-		 'padding-top': '100px'
-	     });
+			 'padding-top': '100px'
+		     });
 
-	     $('nav').css({
-		 'border-bottom': '5px',
-		 'border-bottom-width': '5px',
-		 'border-bottom-style': 'solid',
-		 'border-bottom-color': '#08c',
-		 'background-color': '#333333'
-	     });
+		     $('nav').css({
+			 'border-bottom': '5px',
+			 'border-bottom-width': '5px',
+			 'border-bottom-style': 'solid',
+			 'border-bottom-color': '#08c',
+			 'background-color': '#333333'
+		     });
 
-	     $('button').css({
-		 'background-color': 'rgba(0,0,0,0)',
-		 'border-color': '#08c',
-		 'border': '3px solid',
-		 'color': '#08c'
-	     });
+		     $('button').css({
+			 'background-color': 'rgba(0,0,0,0)',
+			 'border-color': 'red',
+			 'border': '3px solid',
+			 'color': 'red'
+		     });
 
-	     $('#logo').on('mouseover', function() {
-		 $(this).attr("src","/s_circle_red.png");
-		 $('.arch').css({
-		     'background-color': 'red',
-		     'border-color': 'red',
-		     'color': 'white',
-		 });
-	     });
+		     $('#logo').on('mouseover', function() {
+			 $(this).attr("src","/s_circle_red.png");
+			 $('nav.arch').css({
+			     'background-color': 'red',
+			     'border-color': 'red',
+			     'color': 'white',
+			 });
+		     });
 
-	     $('#logo').on('mouseout', function() {
-		 $(this).attr("src","/s_circle_blue.png");
-		 $('.arch').css({
-		     'background-color': 'rgba(0,0,0,0)',
-		     'border-color': '#08c',
-		     'color': '#08c'
-		 });
-	     });
-
-	     $('button').on('mouseover', function() {
-		 $(this).css({
-		     'background-color': '#08c',
-		     'border-color': '#08c',
-		     'color': 'white'
-		 });
-	     });
-
-	     $('button').on('mouseout', function() {
-		 $(this).css({
-		     'background-color': 'rgba(0,0,0,0)',
-		     'border-color': '#08c',
-		     'color': '#08c'
-		 });
+		     $('#logo').on('mouseout', function() {
+			 $(this).attr("src","/s_circle_blue.png");
+			 $('nav.arch').css({
+			     'background-color': 'rgba(0,0,0,0)',
+			     'border-color': '#08c',
+			     'color': '#08c'
+			 });
 		     });
 
 		     $('.notice-labels').hide();
 
+
 		     function name_check(name) {
 			 return /^[A-Z][a-z]*(( ([A-Z]|[a-z])[a-z]*)* [A-Z][a-z]*|)$/.test(name);
 		     }
+
+		     function email_check(email) {
+			 return /^[a-z0-9\.]+@[a-z0-9\.]*[a-z0-9]+\.(jp|com|it|pl|org)$/
+								   .test(email);
+		     }
+
+		     function pass_check(pass) {
+			 res = [0,0,0,0,0];
+			 if (pass.length > 7)
+			     res[1] = 1;
+			 if (/\d/.test(pass))
+			     res[2] = 1;
+			 if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(pass))
+			     res[3] = 1;
+			 if (pass.length > 15)
+			     res[4] = 1;
+			 if (res[1] == 1 && res[2] == 1
+			     && res[3] == 1)
+			     res[0] = 1;
+			 return res;
+		     }
+
+		     
+
+		     function check_and_abilitate() {
+			 if (name_check($('#name').val()) &&
+			     email_check($('#email').val()) &&
+			     pass_check($('#password').val())[0] == 1 &&
+			     $('#password').val() == $('#password_confirmation').val() &&
+			     pass_check($('#password_confirmation').val())[0] == 1
+			 ) {
+
+			     console.log("Check passed!");
+
+			     $('#register_button').attr("type", "submit");
+			     
+			     $('#register_button').on('mouseover', function() {
+				 $(this).css({
+				     'background-color': '#08c',
+				     'border-color': '#08c',
+				     'color': 'white'
+				 });
+			     });
+
+			     $('#register_button').on('mouseout', function() {
+				 $(this).css({
+				     'background-color': 'rgba(0,0,0,0)',
+				     'border-color': '#08c',
+				     'color': '#08c'
+				 });
+			     });
+			 } else {
+			     $('#register_button').attr("type", "button");
+			     
+			     $('#register_button').on('mouseover', function() {
+				 $(this).css({
+				     'background-color': 'red',
+				     'border-color': 'red',
+				     'color': 'white'
+				 });
+			     });
+
+			     $('#register_button').on('mouseout', function() {
+				 $(this).css({
+				     'background-color': 'rgba(0,0,0,0)',
+				     'border-color': 'red',
+				     'color': 'red'
+				 });
+			     });			     
+			 }
+		     }
+
+		     $('#register_button').on('mouseover', function() {
+			 $(this).css({
+			     'background-color': 'red',
+			     'border-color': 'red',
+			     'color': 'white'
+			 });
+			 
+			 check_and_abilitate();
+		     });
 
 		     $('#name').on('keyup', function() {
 			 $('.notice-labels-name').show();
@@ -236,16 +310,15 @@
 			     });
 			 }
 			 $('#notice-name').show();
+
+			 check_and_abilitate();
 		     });
 
-//		     $('#name').on('blur', function() {
-//			 $('.notice-labels-name').hide();
-//		     });
+		     //		     $('#name').on('blur', function() {
+		     //			 $('.notice-labels-name').hide();
+		     //		     });
 
-		     function email_check(email) {
-			 return /^[a-z0-9\.]+@[a-z0-9\.]*[a-z0-9]+\.(jp|com|it|pl|org)$/
-			     .test(email);
-		     }
+		     
 
 		     $('#email').on('keyup', function() {
 
@@ -271,28 +344,15 @@
 			 }
 			 
 			 $('#notice-email').show();
-			 
+
+			 check_and_abilitate();
+
 		     });
 
-//		     $('#email').on('blur', function() {
-//			 $('.notice-labels-email').hide();
-//		     });
+		     //		     $('#email').on('blur', function() {
+		     //			 $('.notice-labels-email').hide();
+		     //		     });
 		     
-		     function pass_check(pass) {
-			 res = [0,0,0,0,0];
-			 if (pass.length > 7)
-			     res[1] = 1;
-			 if (/\d/.test(pass))
-			     res[2] = 1;
-			 if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(pass))
-			     res[3] = 1;
-			 if (pass.length > 15)
-			     res[4] = 1;
-			 if (res[1] == 1 && res[2] == 1
-			     && res[3] == 1)
-			     res[0] = 1;
-			 return res;
-		     }
 		     
 		     $('#password').on('keyup', function() {
 
@@ -367,12 +427,15 @@
 			 else {
 			     $('#notice-password-success').hide();
 			 }
+
+			 check_and_abilitate();
 			 
 		     });
 
-//		     $('#password').on('blur', function() {
-//			 $('.notice-labels-password').hide();
-//		     });
+
+		     //		     $('#password').on('blur', function() {
+		     //			 $('.notice-labels-password').hide();
+		     //		     });
 
 		     $('#password_confirmation').on('keyup', function() {
 			 $('.notice-labels-password_confirmation').show();
@@ -393,12 +456,16 @@
 				 color: '#08c'
 			     });
 			 }
+			 
 			 $('#notice-password_confirmation').show();
+
+			 check_and_abilitate();
+			 
 		     });
 
-//		     $('#password_confirmation').on('blur', function() {
-//			 $('.notice-labels-password_confirmation').hide();
-//		     });
+		     //		     $('#password_confirmation').on('blur', function() {
+		     //			 $('.notice-labels-password_confirmation').hide();
+		     //		     });
 		     
 		    </script>
 		</div>
@@ -409,16 +476,16 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous">
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		     crossorigin="anonymous">
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		     crossorigin="anonymous">
+		     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous">
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-		     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		     crossorigin="anonymous">
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous">
 	</script>
     </body>
 </html>
