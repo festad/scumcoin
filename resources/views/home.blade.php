@@ -48,7 +48,7 @@
 				{{ Auth::user()->name }}
 			    </a>
 			    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">
+				<a class="dropdown-item" href={{ sprintf("/user/%s", Auth::user()->pubkey) }}>
 				    {{ Auth::user()->email }}
 				</a>
 				<a class="dropdown-item" href="#">
