@@ -9,7 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\PasswordResetController;
 
 
 /*
@@ -81,4 +81,12 @@ Route::post('/pay',
 
 Route::get('/admin/dashboard',
            [AdminController::class, 'show_dash']
+);
+
+Route::get('/reset', function() {
+    return view('forgot_password');
+});
+
+Route::post('/reset',
+            [PasswordResetController::class, 'store']
 );

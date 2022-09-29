@@ -56,6 +56,15 @@
 	      </div>
 	    </div>	    
 
+	    <div class="form-row justify-content-center">
+	      <!-- Email Address -->
+		<div class="form-group">
+		    <a href="/reset"
+		       class="link-secondary">
+			Forgot password?
+		    </a>
+		</div>
+	    </div>
 
 	    <div class="form-row justify-content-center">
 	      <!-- Password -->
