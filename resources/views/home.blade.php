@@ -60,6 +60,7 @@
 				    Pay
 				</a>
 				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="/change">Change password</a>
 				<a class="dropdown-item" href="/logout">Log out</a>
 			    </div>
 			</li>

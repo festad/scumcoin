@@ -14,11 +14,20 @@ use App\Mail\PasswordReset;
 class PasswordResetController extends Controller
 {
 
+    public function show(Request $request)
+    {
+        return view('forgot_password');
+    }
+
     public function store(Request $request)
     {
         $user = User::where('email', $request->email)->firstOrFail();
         $new_password = str_shuffle(substr($user->password, 0, 8));
         $user->password = hash('sha256', $new_password);
+
+        $user->change_password = true; // flag for a middleware to force
+        // the user to change password at next login.
+        
         $user->save();
  
         // Ship the order...

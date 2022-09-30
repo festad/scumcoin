@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\ChangeController;
 
 
 /*
@@ -49,12 +50,12 @@ Route::post('/login',
 
 Route::get('/logout',
            [LogoutController::class, 'logout']
-)->middleware('auth')
+)->middleware('auth', 'changed_password')
  ->name('logout');
 
 Route::get('/user/{pubkey}/pay',
            [PayController::class, 'show']
-)->middleware('auth')
+)->middleware(['auth','changed_password'])
   ->name('pay');
 
 Route::get('/user/{pubkey}',
@@ -63,29 +64,37 @@ Route::get('/user/{pubkey}',
 
 Route::post('/delete/confirm',
             [UserController::class, 'confirm']
-)->middleware('auth');
+)->middleware(['auth','changed_password']);
 
 
 Route::post('/delete',
             [UserController::class, 'execute_deletion']
-)->middleware('auth');
+)->middleware(['auth','changed_password']);
 
 
 Route::post('/pay/confirm',
             [PayController::class, 'confirm']
-)->middleware('auth');
+)->middleware(['auth','changed_password']);
 
 Route::post('/pay',
             [PayController::class, 'execute_payment']
-)->middleware('auth');
+)->middleware(['auth','changed_password']);
 
 Route::get('/admin/dashboard',
            [AdminController::class, 'show_dash']
-);
+)->middleware(['auth','changed_password', 'admin']);
 
-Route::get('/reset', function() {
-    return view('forgot_password');
-});
+Route::get('/change',
+           [ChangeController::class, 'show']
+)->middleware('auth')->name('change');
+
+Route::post('/change',
+           [ChangeController::class, 'change']
+)->middleware('auth');
+
+Route::get('/reset',
+           [PasswordResetController::class, 'show']
+);
 
 Route::post('/reset',
             [PasswordResetController::class, 'store']

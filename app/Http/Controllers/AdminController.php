@@ -14,10 +14,6 @@ class AdminController extends Controller
 {
     public function show_dash()
     {
-        if (Auth::user()->power != 'admin')
-        {
-            abort(401);
-        }
 
         $users = User::whereNotIn('power', ['admin'])
                ->orderBy('balance', 'desc')
