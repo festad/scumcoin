@@ -25,17 +25,7 @@
 	    <div class="row">
 		<div class="col">
 		    
-		    <nav class="navbar navbar-expand-md
-				navbar-dark fixed-top bg-dark arch"
-			 id="scumcoin_navbar">
-			<div class="container-fluid">
-			    <a class="navbar-brand" href="/">
-				<img id="logo"
-				     src="/s_circle_blue.png"
-				     width="40" height="40" alt="">
-			    </a>
-			</div>
-		    </nav>
+		    <x-nav></x-nav>
 		    
 		</div>
 	    </div>
@@ -274,41 +264,6 @@
 		     //		     $('#name').on('blur', function() {
 		     //			 $('.notice-labels-name').hide();
 		     //		     });
-
-		     
-
-		     $('#email').on('keyup', function() {
-
-			 $('.notice-labels-email').show();
-			 
-			 res = email_check($(this).val());
-			 
-			 if (!res) {
-			     $('#notice-email')
-				 .text("Invalid email.");
-			     $('#notice-email')
-				 .css({
-				     color: 'red'
-				 });
-			 }
-			 else {
-			     $('#notice-email')
-				 .text("Valid email.");
-			     $('#notice-email')
-				 .css({
-				     color: '#08c'
-				 });
-			 }
-			 
-			 $('#notice-email').show();
-
-			 check_and_abilitate();
-
-		     });
-
-		     //		     $('#email').on('blur', function() {
-		     //			 $('.notice-labels-email').hide();
-		     //		     });
 		     
 		     
 		     $('#password').on('keyup', function() {
@@ -411,6 +366,12 @@
 			     $('#notice-password_confirmation').text("Alright!");
 			     $('#notice-password_confirmation').css({
 				 color: '#08c'
+			     });
+			     
+			     $('#change_button').css({
+				 'background-color': 'rgba(0,0,0,0)',
+				 'border-color': '#08c',
+				 'color': '#08c'
 			     });
 			 }
 			 

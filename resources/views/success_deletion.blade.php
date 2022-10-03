@@ -21,17 +21,7 @@
 	<div class="row">
 	    <div class="col">
 		
-		<nav class="navbar navbar-expand-md
-			    navbar-dark fixed-top bg-dark
-			    arch"
-		     id="scumcoin_navbar">
-		    <div class="container-fluid">
-			<a class="navbar-brand" href="/">
-			    <img src="/s_circle_blue.png"
-				 id="logo" width="40" height="40" alt="">
-			</a>
-		    </div>
-		</nav>
+		<x-nav></x-nav>
 		
 	    </div>
 	</div>

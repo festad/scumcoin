@@ -25,17 +25,7 @@
 	    <div class="row">
 		<div class="col">
 		    
-		    <nav class="navbar navbar-expand-md
-				navbar-dark fixed-top bg-dark arch"
-			 id="scumcoin_navbar">
-			<div class="container-fluid">
-			    <a class="navbar-brand" href="/">
-				<img id="logo"
-				     src="/s_circle_blue.png"
-				     width="40" height="40" alt="">
-			    </a>
-			</div>
-		    </nav>
+		    <x-nav></x-nav>
 		    
 		</div>
 	    </div>
@@ -172,6 +162,10 @@
 		     $('body').css({
 			 'padding-top': '100px'
 		     });
+		     $('body').css({
+			 'padding-bottom': '100px'
+		     });
+
 
 		     $('nav').css({
 			 'border-bottom': '5px',
@@ -183,9 +177,48 @@
 
 		     $('button').css({
 			 'background-color': 'rgba(0,0,0,0)',
+			 'border-color': '#08c',
+			 'border': '3px solid',
+			 'color': '#08c'
+		     });
+		     
+		     $('#register_button').css({
+			 'background-color': 'rgba(0,0,0,0)',
 			 'border-color': 'red',
 			 'border': '3px solid',
 			 'color': 'red'
+		     });
+
+		     $('button').on('mouseover', function() {
+			 $(this).css({
+			     'background-color': '#08c',
+			     'border-color': '#08c',
+			     'color': 'white'
+			 });
+		     });
+
+		     $('button').on('mouseout', function() {
+			 $(this).css({
+			     'background-color': 'rgba(0,0,0,0)',
+			     'border-color': '#08c',
+			     'color': '#08c'
+			 });
+		     });
+
+		     $('#register_button').on('mouseover', function() {
+			 $(this).css({
+			     'background-color': 'red',
+			     'border-color': 'red',
+			     'color': 'white'
+			 });
+		     });
+
+		     $('#register_button').on('mouseout', function() {
+			 $(this).css({
+			     'background-color': 'rgba(0,0,0,0)',
+			     'border-color': 'red',
+			     'color': 'red'
+			 });
 		     });
 
 		     $('#logo').on('mouseover', function() {
