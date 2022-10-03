@@ -4,6 +4,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" 
@@ -18,11 +19,18 @@
 
     <body>
 
+	<script
+	    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+	</script>
+
+	<script src="https://www.paypal.com/sdk/js?client-id=Aak2gVw-TcN15REaBicCyY4q0GFTLG2bPN3D_fUnQQTULbMXwY8vhCBjLaMS2PF2sm1FIsjagVMBnr_T&components=buttons">
+	</script>
+
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark
 		    arch" 
              id="scumcoin_navbar">
 	    <div class="container-fluid">
-		<a class="navbar-brand" href="/">
+		<a id="home_link" class="navbar-brand" href="/">
 		    <img id="logo"
 			 src="/s_circle_blue.png"
 			 width="40" height="40" alt="">
@@ -59,10 +67,6 @@
 				   href={{ sprintf("/user/%s/pay", Auth::user()->pubkey) }}>
 				    Pay
 				</a>
-				<a class="dropdown-item"
-				   href="/buy">
-				    Buy
-				</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/change">Change password</a>
 				<a class="dropdown-item" href="/logout">Log out</a>
@@ -91,7 +95,7 @@
 
 		    @guest
 		    <form class="d-flex ml-auto"
-				 action="/login">
+			  action="/login">
 			@csrf
 			<!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
 			<button class="btn btn-outline-success arch" 
@@ -112,51 +116,83 @@
 	    </div>
 	</nav>
 
-	<div class="container-fluid">
-	    <div class="row justify-content-center">
-		<div class="col">
-		    <table class="table table-bordered">
-			<thead>
-			    <tr>
-				<th scope="col">Sender</th>
-				<th scope="col">Receiver</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Time</th>
-			    </tr>
-			</thead>
-			@foreach ($transactions as $transaction)
-			    <tbody>
-				<tr>
-				    <td>
-					<a href={{ sprintf("/user/%s", $transaction->sender) }}
-					   class="link-secondary">
-					    {{ sprintf("%32.32s ...", $transaction->sender) }}
-					</a>
-				    </td>
-				    <td>
-					<a href={{ sprintf("/user/%s", $transaction->receiver) }}
-					   class="link-secondary">
-					    {{ sprintf("%32.32s ...", $transaction->receiver) }}
-					</a>
-				    </td>
-				    <td>
-					{{ $transaction->amount }}
-				    </td>
-				    <td>
-					{{ $transaction->created_at }}
-				    </td>
-				</tr>
-			    </tbody>
-			@endforeach
-		    </table>
-		    {{ $transactions->links() }}
+	<div class="container-fluid"
+	     style="margin-top: 200px">
+	    <div class="row justify-content-center"
+		 id="paypal-content"></div>
+	    
+	    <form
+		id="form_buy"
+		action="/buy/complete"
+		method="POST">
+
+		@csrf
+
+		<div class="form row justify-content-center">
+		    <div class="alert alert-success" role="alert">
+			{{ sprintf("%f scumcoins added to your wallet!", $amount) }}
+		    </div>
 		</div>
-	    </div>
+		
+		<div class="form-row justify-content-center">
+		    <!-- Name -->
+		    <div class="form-group">
+			<input id="amount"
+			       class="form-control"
+			       type="text" name="amount"
+			       value={{ sprintf("%f",$amount) }}
+			       placeholder="Amount"
+			       hidden="true"
+			       required/>
+		    </div>
+		</div>
+
+		<div class="form-row justify-content-center">
+		    <button class="btn btn-primary arch"
+			    type="submit"
+			    id="buy_button">
+			Home
+		    </button>
+		</div>
+	    </form>
+	    
+	    <script>
+		$('#form_buy').hide();
+	    </script>
+
 	</div>
 
-	    <script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-	    </script> 
+		    <script>		     
+		     paypal.Buttons({
+			 style: {
+			     layout: 'vertical',
+			     color:  'blue',
+			     shape:  'rect',
+			     label:  'paypal'
+			 },
+			 createOrder: function(data, actions) {
+			     return actions.order.create({
+				 purchase_units: [{
+				     amount: {
+					 value: {{ $amount }}
+				     }
+				 }]
+			     });
+			 },
+			 onApprove: function(data, actions) {
+			     return actions.order.capture().then(function(details) {
+				 
+				 $('#paypal-content').hide();
+				 $('#form_buy').show();
+				 $('#home_link').attr("href", "#");
+				 $('nav').hide();
+			     });
+			 }
+		     }).render('#paypal-content');
+		     
+		    </script>
+
+	    
 	    
 	    <script>
 	     $('body').css({

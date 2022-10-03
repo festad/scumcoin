@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PayController;
+use App\Http\Controllers\BuyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ChangeController;
@@ -78,6 +79,22 @@ Route::post('/pay/confirm',
 
 Route::post('/pay',
             [PayController::class, 'execute_payment']
+)->middleware(['auth','changed_password']);
+
+Route::get('/buy',
+            [BuyController::class, 'show']
+)->middleware(['auth','changed_password']);
+
+Route::get('/buy/cc/amount',
+            [BuyController::class, 'show_buy_cc_amount']
+)->middleware(['auth','changed_password']);
+
+Route::post('/buy/cc',
+            [BuyController::class, 'show_buy_cc']
+)->middleware(['auth','changed_password']);
+
+Route::post('/buy/complete',
+            [BuyController::class, 'complete_payment']
 )->middleware(['auth','changed_password']);
 
 Route::get('/admin/dashboard',

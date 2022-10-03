@@ -29,11 +29,11 @@
 		</a>
 
 		<button class="navbar-toggler arch"
-			type="button" data-bs-toggle="collapse" 
-			       data-bs-target="#navbarCollapse"
-			aria-controls="navbarCollapse" 
-			aria-expanded="false" aria-label="Toggle navigation"
-			id="navbar_toggler">
+			       type="button" data-bs-toggle="collapse" 
+			data-bs-target="#navbarCollapse"
+			       aria-controls="navbarCollapse" 
+			       aria-expanded="false" aria-label="Toggle navigation"
+			       id="navbar_toggler">
 		    <span class="navbar-toggler-icon"></span>
 		</button>
 
@@ -58,10 +58,6 @@
 				<a class="dropdown-item"
 				   href={{ sprintf("/user/%s/pay", Auth::user()->pubkey) }}>
 				    Pay
-				</a>
-				<a class="dropdown-item"
-				   href="/buy">
-				    Buy
 				</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/change">Change password</a>
@@ -91,17 +87,17 @@
 
 		    @guest
 		    <form class="d-flex ml-auto"
-				 action="/login">
+			  action="/login">
 			@csrf
 			<!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
 			<button class="btn btn-outline-success arch" 
-				type="submit" id="login_button">
+				       type="submit" id="login_button">
 			    Login
 			</button>
 			
 			<button class="btn btn-outline-success arch" 
-				type="submit" id="register_button"
-				formaction="/register">
+				       type="submit" id="register_button"
+				       formaction="/register">
 			    Register
 			</button>
 		    </form>
@@ -115,44 +111,27 @@
 	<div class="container-fluid">
 	    <div class="row justify-content-center">
 		<div class="col">
-		    <table class="table table-bordered">
-			<thead>
-			    <tr>
-				<th scope="col">Sender</th>
-				<th scope="col">Receiver</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Time</th>
-			    </tr>
-			</thead>
-			@foreach ($transactions as $transaction)
-			    <tbody>
-				<tr>
-				    <td>
-					<a href={{ sprintf("/user/%s", $transaction->sender) }}
-					   class="link-secondary">
-					    {{ sprintf("%32.32s ...", $transaction->sender) }}
-					</a>
-				    </td>
-				    <td>
-					<a href={{ sprintf("/user/%s", $transaction->receiver) }}
-					   class="link-secondary">
-					    {{ sprintf("%32.32s ...", $transaction->receiver) }}
-					</a>
-				    </td>
-				    <td>
-					{{ $transaction->amount }}
-				    </td>
-				    <td>
-					{{ $transaction->created_at }}
-				    </td>
-				</tr>
-			    </tbody>
-			@endforeach
-		    </table>
-		    {{ $transactions->links() }}
+		    <div class="row justify-content-center">
+			<a  href="/buy/cc/amount">
+			    <button class="btn btn-outline-success arch"
+				    style="margin-top: 100px">
+				Buy with a credit card
+			    </button>
+			</a>
+		    </div>
+		    
+		    <div class="row justify-content-center">
+			<a  href="/buy/voucher">
+			    <button class="btn btn-outline-success arch"
+				    style="margin-top: 100px">
+				Redeem your voucher
+			    </button>
+			</a>
+		    </div>
 		</div>
 	    </div>
 	</div>
+
 
 	    <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
