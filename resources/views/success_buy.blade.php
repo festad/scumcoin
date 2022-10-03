@@ -32,7 +32,7 @@
 	    
 	    <div class="form row justify-content-center">
 		<div class="alert alert-success" role="alert">
-		    {{ sprintf("%f scumcoins bought correctly!", $amount) }}
+		    {{ sprintf("%f scumcoins bought!", $amount) }}
 		</div>
 	    </div>
 	    <div class="form-row justify-content-center">
@@ -52,6 +52,8 @@
 	 $('body').css({
 	     'padding-top': '100px'
 	 });
+
+	 $('a').attr("href", "#");
 
 	 $('nav').css({
 	     'border-bottom': '5px',
@@ -105,6 +107,7 @@
 		 'color': '#08c'
 	     });
 	 });
+	 
 	</script>
 
 

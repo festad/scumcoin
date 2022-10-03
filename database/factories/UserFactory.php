@@ -19,18 +19,18 @@ class UserFactory extends Factory
     {
 
         $email  = fake()->unique()->safeEmail();
-	$pubkey = hash('sha256', $email);
-	$pass   = Str::random(16);
-	$hash    = hash('sha256', $pass);
-	$balance = rand(10, 500);
+        $pubkey = hash('sha256', $email);
+        $pass   = Str::random(16);
+        $hash    = hash('sha256', $pass);
+        $balance = rand(10, 500);
 	
         return [
             'name' => fake()->name(),
             'email' => $email,
-	    'pubkey' => $pubkey,
+            'pubkey' => $pubkey,
             'email_verified_at' => now(),
             'password' => $hash,
-	    'balance' => $balance,
+            'balance' => $balance,
             'remember_token' => Str::random(10),
         ];
     }

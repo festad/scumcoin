@@ -19,16 +19,16 @@ class TransactionFactory extends Factory
     public function definition()
     {
         $nusers = 10;
-	$sender_id = rand(1, $nusers-1);
-	$sender = User::findOrFail($sender_id);
-	$receiver_id = rand($sender_id+1, $nusers);
-	$receiver = User::findOrFail($receiver_id);
-	$amount = rand(10, 500);
+        $sender_id = rand(1, $nusers-1);
+        $sender = User::findOrFail($sender_id);
+        $receiver_id = rand($sender_id+1, $nusers);
+        $receiver = User::findOrFail($receiver_id);
+        $amount = rand(10, 500);
 	
         return [
-	    'sender' => $sender->pubkey,
-	    'receiver' => $receiver->pubkey,
-	    'amount' => $amount,
+            'sender' => $sender->pubkey,
+            'receiver' => $receiver->pubkey,
+            'amount' => $amount,
         ];
     }
 }
