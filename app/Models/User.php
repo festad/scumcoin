@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'balance',
         'power',
+        'change_password'
     ];
 
     /**

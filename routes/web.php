@@ -98,7 +98,8 @@ Route::get('/buy/voucher',
 )->middleware(['auth','changed_password']);
 
 Route::post('/buy/voucher/complete',
-            [BuyController::class, 'buy_with_voucher']);
+            [BuyController::class, 'buy_with_voucher']
+)->middleware(['auth','changed_password']);
 
 Route::post('/buy/complete',
             [BuyController::class, 'complete_payment']

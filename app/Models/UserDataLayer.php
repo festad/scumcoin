@@ -19,6 +19,7 @@ class UserDataLayer
             'password' => $h_password,
             'balance' => 0,
             'power' => 'normal',
+            'change_password' => false,
         ]);
         $user->save();
         Auth::login($user);
