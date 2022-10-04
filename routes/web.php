@@ -25,6 +25,77 @@ use App\Http\Controllers\ChangeController;
 |
 */
 
+Route::middleware('auth')->group(function () {
+    
+    Route::get('/change',
+               [ChangeController::class, 'show']
+    )->name('change');
+
+    Route::post('/change',
+                [ChangeController::class, 'change']
+    );
+
+});
+
+
+Route::middleware(['auth', 'change_password'])->group(function () {
+
+    Route::get('/logout',
+               [LogoutController::class, 'logout']
+    )->name('logout');
+
+    Route::get('/user/{pubkey}/pay',
+               [PayController::class, 'show']
+    )->name('pay');
+
+    Route::post('/delete/confirm',
+                [UserController::class, 'confirm']
+    );
+
+    Route::post('/delete',
+                [UserController::class, 'execute_deletion']
+    );
+
+
+    Route::post('/pay/confirm',
+                [PayController::class, 'confirm']
+    );
+
+    Route::post('/pay',
+                [PayController::class, 'execute_payment']
+    );
+
+    Route::get('/buy',
+               [BuyController::class, 'show']
+    );
+
+    Route::get('/buy/cc/amount',
+               [BuyController::class, 'show_buy_cc_amount']
+    );
+
+    Route::post('/buy/cc',
+                [BuyController::class, 'show_buy_cc']
+    );
+
+    Route::get('/buy/voucher',
+               [BuyController::class, 'show_buy_voucher']
+    );
+
+    Route::post('/buy/voucher/complete',
+                [BuyController::class, 'buy_with_voucher']
+    );
+
+    Route::post('/buy/complete',
+                [BuyController::class, 'complete_payment']
+    );
+
+    Route::get('/admin/dashboard',
+               [AdminController::class, 'show_dash']
+    );
+
+
+});
+
 Route::get('/',
            [HomeController::class, 'show']
 )->name('home');
@@ -49,73 +120,11 @@ Route::post('/login',
             [LoginController::class, 'authenticate']
 );
 
-Route::get('/logout',
-           [LogoutController::class, 'logout']
-)->middleware('auth', 'changed_password')
- ->name('logout');
-
-Route::get('/user/{pubkey}/pay',
-           [PayController::class, 'show']
-)->middleware(['auth','changed_password'])
-  ->name('pay');
 
 Route::get('/user/{pubkey}',
            [UserController::class, 'show']
 )->name('user');
 
-Route::post('/delete/confirm',
-            [UserController::class, 'confirm']
-)->middleware(['auth','changed_password']);
-
-
-Route::post('/delete',
-            [UserController::class, 'execute_deletion']
-)->middleware(['auth','changed_password']);
-
-
-Route::post('/pay/confirm',
-            [PayController::class, 'confirm']
-)->middleware(['auth','changed_password']);
-
-Route::post('/pay',
-            [PayController::class, 'execute_payment']
-)->middleware(['auth','changed_password']);
-
-Route::get('/buy',
-            [BuyController::class, 'show']
-)->middleware(['auth','changed_password']);
-
-Route::get('/buy/cc/amount',
-            [BuyController::class, 'show_buy_cc_amount']
-)->middleware(['auth','changed_password']);
-
-Route::post('/buy/cc',
-            [BuyController::class, 'show_buy_cc']
-)->middleware(['auth','changed_password']);
-
-Route::get('/buy/voucher',
-            [BuyController::class, 'show_buy_voucher']
-)->middleware(['auth','changed_password']);
-
-Route::post('/buy/voucher/complete',
-            [BuyController::class, 'buy_with_voucher']
-)->middleware(['auth','changed_password']);
-
-Route::post('/buy/complete',
-            [BuyController::class, 'complete_payment']
-)->middleware(['auth','changed_password']);
-
-Route::get('/admin/dashboard',
-           [AdminController::class, 'show_dash']
-)->middleware(['auth','changed_password', 'admin']);
-
-Route::get('/change',
-           [ChangeController::class, 'show']
-)->middleware('auth')->name('change');
-
-Route::post('/change',
-           [ChangeController::class, 'change']
-)->middleware('auth');
 
 Route::get('/reset',
            [PasswordResetController::class, 'show']
