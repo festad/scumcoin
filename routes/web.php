@@ -25,7 +25,7 @@ use App\Http\Controllers\ChangeController;
 |
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     
     Route::get('/change',
                [ChangeController::class, 'show']
@@ -38,15 +38,38 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth', 'change_password'])->group(function () {
+Route::middleware(['auth', 'changed_password'])->group(function () {
+
+    Route::controller(PayController::class)->group(function() {
+        
+        Route::get('/user/{pubkey}/pay','show')->name('pay');
+
+        Route::post('/pay/confirm','confirm');
+
+        Route::post('/pay','execute_payment');
+
+        
+    });
+
+    Route::controller(BuyController::class)->group(function() {
+
+        Route::get('/buy','show');
+
+        Route::get('/buy/cc/amount','show_buy_cc_amount');
+
+        Route::post('/buy/cc','show_buy_cc');
+
+        Route::get('/buy/voucher','show_buy_voucher');
+
+        Route::post('/buy/voucher/complete','buy_with_voucher');
+
+        Route::post('/buy/complete','complete_payment');
+        
+    });
 
     Route::get('/logout',
                [LogoutController::class, 'logout']
     )->name('logout');
-
-    Route::get('/user/{pubkey}/pay',
-               [PayController::class, 'show']
-    )->name('pay');
 
     Route::post('/delete/confirm',
                 [UserController::class, 'confirm']
@@ -55,40 +78,7 @@ Route::middleware(['auth', 'change_password'])->group(function () {
     Route::post('/delete',
                 [UserController::class, 'execute_deletion']
     );
-
-
-    Route::post('/pay/confirm',
-                [PayController::class, 'confirm']
-    );
-
-    Route::post('/pay',
-                [PayController::class, 'execute_payment']
-    );
-
-    Route::get('/buy',
-               [BuyController::class, 'show']
-    );
-
-    Route::get('/buy/cc/amount',
-               [BuyController::class, 'show_buy_cc_amount']
-    );
-
-    Route::post('/buy/cc',
-                [BuyController::class, 'show_buy_cc']
-    );
-
-    Route::get('/buy/voucher',
-               [BuyController::class, 'show_buy_voucher']
-    );
-
-    Route::post('/buy/voucher/complete',
-                [BuyController::class, 'buy_with_voucher']
-    );
-
-    Route::post('/buy/complete',
-                [BuyController::class, 'complete_payment']
-    );
-
+    
     Route::get('/admin/dashboard',
                [AdminController::class, 'show_dash']
     );
@@ -104,6 +94,8 @@ Route::post('/',
             [HomeController::class, 'show']
 )->name('home');
 
+
+
 Route::get('/register',
            [RegisterController::class, 'create']
 )->name('register');
@@ -111,6 +103,8 @@ Route::get('/register',
 Route::post('/register',
             [RegisterController::class, 'store']
 );
+
+
 
 Route::get('/login',
            [LoginController::class, 'show']
@@ -121,9 +115,11 @@ Route::post('/login',
 );
 
 
+
 Route::get('/user/{pubkey}',
            [UserController::class, 'show']
 )->name('user');
+
 
 
 Route::get('/reset',
