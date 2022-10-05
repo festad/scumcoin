@@ -95,7 +95,7 @@
 			     return actions.order.capture().then(function(details) {
 				 
 				 $('#paypal-content').hide();
-				 $('#form_buy').show();
+				 $('#form_buy').submit();
 				 $('a').attr("href", "#");
 			     });
 			 }
