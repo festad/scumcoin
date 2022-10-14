@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -129,3 +130,13 @@ Route::get('/reset',
 Route::post('/reset',
             [PasswordResetController::class, 'store']
 );
+
+Route::get('/lang/{locale}', function($locale) {
+    if (! in_array($locale, ['en', 'pl', 'it'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+
+    return redirect('/');
+});

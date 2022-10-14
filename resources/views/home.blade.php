@@ -26,10 +26,10 @@
 		    <table class="table table-bordered">
 			<thead>
 			    <tr>
-				<th scope="col">Sender</th>
-				<th scope="col">Receiver</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Time</th>
+				<th scope="col">{{ __('messages.sender') }}</th>
+				<th scope="col">{{ __('messages.receiver') }}</th>
+				<th scope="col">{{ __('messages.amount') }}</th>
+				<th scope="col">{{ __('messages.time') }}</th>
 			    </tr>
 			</thead>
 			@foreach ($transactions as $transaction)
