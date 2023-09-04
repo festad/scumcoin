@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -25,6 +26,67 @@ use App\Http\Controllers\ChangeController;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/change',
+               [ChangeController::class, 'show']
+    )->name('change');
+
+    Route::post('/change',
+                [ChangeController::class, 'change']
+    );
+
+});
+
+
+Route::middleware(['auth', 'changed_password'])->group(function () {
+
+    Route::controller(PayController::class)->group(function() {
+        
+        Route::get('/user/{pubkey}/pay','show')->name('pay');
+
+        Route::post('/pay/confirm','confirm');
+
+        Route::post('/pay','execute_payment');
+
+        
+    });
+
+    Route::controller(BuyController::class)->group(function() {
+
+        Route::get('/buy','show');
+
+        Route::get('/buy/cc/amount','show_buy_cc_amount');
+
+        Route::post('/buy/cc','show_buy_cc');
+
+        Route::get('/buy/voucher','show_buy_voucher');
+
+        Route::post('/buy/voucher/complete','buy_with_voucher');
+
+        Route::post('/buy/complete','complete_payment');
+        
+    });
+
+    Route::get('/logout',
+               [LogoutController::class, 'logout']
+    )->name('logout');
+
+    Route::post('/delete/confirm',
+                [UserController::class, 'confirm']
+    );
+
+    Route::post('/delete',
+                [UserController::class, 'execute_deletion']
+    );
+    
+    Route::get('/admin/dashboard',
+               [AdminController::class, 'show_dash']
+    );
+
+
+});
+
 Route::get('/',
            [HomeController::class, 'show']
 )->name('home');
@@ -32,6 +94,8 @@ Route::get('/',
 Route::post('/',
             [HomeController::class, 'show']
 )->name('home');
+
+
 
 Route::get('/register',
            [RegisterController::class, 'create']
@@ -41,6 +105,8 @@ Route::post('/register',
             [RegisterController::class, 'store']
 );
 
+
+
 Route::get('/login',
            [LoginController::class, 'show']
 )->name('login');
@@ -49,73 +115,13 @@ Route::post('/login',
             [LoginController::class, 'authenticate']
 );
 
-Route::get('/logout',
-           [LogoutController::class, 'logout']
-)->middleware('auth', 'changed_password')
- ->name('logout');
 
-Route::get('/user/{pubkey}/pay',
-           [PayController::class, 'show']
-)->middleware(['auth','changed_password'])
-  ->name('pay');
 
 Route::get('/user/{pubkey}',
            [UserController::class, 'show']
 )->name('user');
 
-Route::post('/delete/confirm',
-            [UserController::class, 'confirm']
-)->middleware(['auth','changed_password']);
 
-
-Route::post('/delete',
-            [UserController::class, 'execute_deletion']
-)->middleware(['auth','changed_password']);
-
-
-Route::post('/pay/confirm',
-            [PayController::class, 'confirm']
-)->middleware(['auth','changed_password']);
-
-Route::post('/pay',
-            [PayController::class, 'execute_payment']
-)->middleware(['auth','changed_password']);
-
-Route::get('/buy',
-            [BuyController::class, 'show']
-)->middleware(['auth','changed_password']);
-
-Route::get('/buy/cc/amount',
-            [BuyController::class, 'show_buy_cc_amount']
-)->middleware(['auth','changed_password']);
-
-Route::post('/buy/cc',
-            [BuyController::class, 'show_buy_cc']
-)->middleware(['auth','changed_password']);
-
-Route::get('/buy/voucher',
-            [BuyController::class, 'show_buy_voucher']
-)->middleware(['auth','changed_password']);
-
-Route::post('/buy/voucher/complete',
-            [BuyController::class, 'buy_with_voucher']
-)->middleware(['auth','changed_password']);
-
-Route::post('/buy/complete',
-            [BuyController::class, 'complete_payment']
-)->middleware(['auth','changed_password']);
-
-Route::get('/admin/dashboard',
-           [AdminController::class, 'show_dash']
-)->middleware(['auth','changed_password', 'admin']);
-
-Route::get('/change',
-           [ChangeController::class, 'show']
-)->middleware('auth')->name('change');
-
-Route::post('/change',
-           [ChangeController::class, 'change']
-)->middleware('auth');
 
 Route::get('/reset',
            [PasswordResetController::class, 'show']
@@ -124,3 +130,13 @@ Route::get('/reset',
 Route::post('/reset',
             [PasswordResetController::class, 'store']
 );
+
+Route::get('/lang/{locale}', function($locale) {
+    if (! in_array($locale, ['en', 'pl', 'it'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+
+    return redirect('/');
+});
