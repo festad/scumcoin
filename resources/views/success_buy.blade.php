@@ -32,7 +32,7 @@
 	    
 	    <div class="form row justify-content-center">
 		<div class="alert alert-success" role="alert">
-		    {{ sprintf("%f scumcoins bought!", $amount) }}
+		    {{ sprintf("%f scumcoins added to your wallet!", $amount) }}
 		</div>
 	    </div>
 	    <div class="form-row justify-content-center">

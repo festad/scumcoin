@@ -107,7 +107,7 @@
 	    
 	    <script>
 	     $('body').css({
-		 'padding-top': '100px'
+		 'padding': '100px'
 	     });
 
 	     $('nav').css({
