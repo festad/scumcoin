@@ -79,13 +79,15 @@ Route::middleware(['auth', 'changed_password'])->group(function () {
     Route::post('/delete',
                 [UserController::class, 'execute_deletion']
     );
-    
-    Route::get('/admin/dashboard',
-               [AdminController::class, 'show_dash']
-    );
-
 
 });
+
+Route::middleware(['auth', 'changed_password', 'admin'])->group(function () {
+    Route::get('/admin/dashboard',
+               [AdminController::class, 'show_dash']
+    )->name('admin.dashboard');
+});
+
 
 Route::get('/',
            [HomeController::class, 'show']

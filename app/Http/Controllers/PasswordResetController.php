@@ -23,16 +23,20 @@ class PasswordResetController extends Controller
     {
         $user = User::where('email', $request->email)->firstOrFail();
         $new_password = str_shuffle(substr($user->password, 0, 8));
+
         $user->password = hash('sha256', $new_password);
+
 
         $user->change_password = true; // flag for a middleware to force
         // the user to change password at next login.
         
         $user->save();
+
+         // Mail::to($request->email)->send(new PasswordReset($new_password));
  
-        // Ship the order...
- 
-        Mail::to($request->email)->send(new PasswordReset($new_password));
-        return redirect()->route('home');
+        // We send the new password as a response that will be displayed in the home.
+
+        return response()->json(['new_password' => $new_password]);
+        
     }
 }
