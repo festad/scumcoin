@@ -37,7 +37,6 @@
 				<input id="amount"
 				       class="form-control"
 				       type="text" name="amount"
-				       value="0.00"
 				       placeholder="Amount"
 				       required/>
 			    </div>
