@@ -1,4 +1,3 @@
-
 $('body').css({
     'padding-top': '100px'
 });
@@ -25,6 +24,16 @@ $('#logo').on('mouseover', function() {
         'border-color': 'red',
         'color': 'white'
     });
+    $('#delete_button').css({
+        'background-color': 'red',
+        'border-color': 'red',
+        'color': 'white'
+    });
+    $('#pay_user_button').css({
+        'background-color': 'green',
+        'border-color': 'green',
+        'color': 'white'
+    });
 });
 
 $('#logo').on('mouseout', function() {
@@ -33,6 +42,16 @@ $('#logo').on('mouseout', function() {
         'background-color': 'rgba(0,0,0,0)',
         'border-color': '#08c',
         'color': '#08c'
+    });
+    $('#delete_button').css({
+        'background-color': 'rgba(0,0,0,0)',
+        'border-color': 'red',
+        'color': 'red'
+    });
+    $('#pay_user_button').css({
+        'background-color': 'rgba(0,0,0,0)',
+        'border-color': 'green',
+        'color': 'green'
     });
 });
 
@@ -49,5 +68,39 @@ $('button').on('mouseout', function() {
         'background-color': 'rgba(0,0,0,0)',
         'border-color': '#08c',
         'color': '#08c'
+    });
+});
+
+$('#pay_user_button').on('mouseover', function() {
+    $(this).css({
+        'background-color': 'green',
+        'border-color': 'green',
+        'color': 'white'
+    });
+});
+
+$('#pay_user_button').on('mouseout', function() {
+    $(this).css({
+        'background-color': 'rgba(0,0,0,0)',
+        'border-color': 'green',
+        'color': 'green'
+    });
+});
+
+$('#delete_button').on('mouseover', function() {
+    color = $(this).css('border-color');
+    $(this).css({
+        'background-color': 'red',
+        'border-color': 'red',
+        'color': 'white'
+    });
+});
+
+$('#delete_button').on('mouseout', function() {
+    color = $(this).css('border-color');
+    $(this).css({
+        'background-color': 'rgba(0,0,0,0)',
+        'border-color': 'red',
+        'color': 'red'
     });
 });
