@@ -49,7 +49,7 @@ class BuyController extends Controller
         Auth::user()->balance = Auth::user()->balance + floatval($request->amount);
         Auth::user()->save();
         
-        return redirect()->route("home");
+        return response()->json(['redirect' => route('home')]);
     }
     
 }

@@ -88,14 +88,13 @@ Route::middleware(['auth', 'changed_password', 'admin'])->group(function () {
     )->name('admin.dashboard');
 });
 
-
 Route::get('/',
            [HomeController::class, 'show']
 )->name('home');
 
-Route::post('/',
-            [HomeController::class, 'show']
-)->name('home');
+// Route::post('/',
+//             [HomeController::class, 'show']
+// )->name('home');
 
 
 
@@ -106,8 +105,6 @@ Route::get('/register',
 Route::post('/register',
             [RegisterController::class, 'store']
 );
-
-
 
 Route::get('/login',
            [LoginController::class, 'show']
