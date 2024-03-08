@@ -45,6 +45,7 @@ paypal.Buttons({
             $.ajax({
                 url: '/buy/complete',
                 type: 'POST',
+                dataType: 'json',
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'),
                     amount: {{ $amount }},

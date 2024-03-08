@@ -35,13 +35,23 @@ class BuyController extends Controller
 
     public function buy_with_voucher(Request $request)
     {
+        // // if the voucher does not exist give the control
+        // // to the ajax error handler
+        if (!Voucher::where('code', $request->code)->exists()) {
+            error_log("Error in first if voucher does not exist");
+            return response()->json(['error' => 'Voucher does not exist']);
+        }
+
         $amount = Voucher::where('code', $request->code)->firstOrFail()->amount;
+        error_log("Error in voucher amount firstOrFail");
+
         Auth::user()->balance = Auth::user()->balance + $amount;
         Auth::user()->save();
+
         Voucher::where('code', $request->code)->delete();
-        return view('success_buy', [
-            'amount' => $amount
-        ]);
+
+        error_log("Just before final return");
+        return response()->json(['redirect' => route('home')]);
     }
     
     public function complete_payment(Request $request)

@@ -43,6 +43,7 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
         $user = UserDataLayer::create($name, $email, $password);
+        Auth::login($user);
     }
 
     /**

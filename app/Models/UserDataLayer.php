@@ -22,7 +22,7 @@ class UserDataLayer
             'change_password' => false,
         ]);
         $user->save();
-        Auth::login($user);
+        // Auth::login($user);
         return $user;
     }
 }
