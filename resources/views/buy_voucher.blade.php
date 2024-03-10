@@ -56,6 +56,8 @@
 	// and redirects to home in case of success or shows an alert
 	// in case of error
 	$('#buy_button').click(function() {
+		event.preventDefault();
+
 		$.ajax({
 			url: '/buy/voucher/complete',
 			type: 'POST',
@@ -65,19 +67,21 @@
 				code: $("#code").val(),
 			},
 			success: function(response) {
-				// if (response.error) {
-				// 	alert(response.error);
-				// }
-				// Redirect to the home page
-				// console.log(response);
-				// if (response.error) {
-				// 	alert("Success handler: " + response.error);
-				// }
-				window.location.href = "{{ route('home') }}"
+				console.log(response);
+				console.log('SUCCESS CASE:')
+				if (response.error) {
+					console.log('Error in SUCCESS CASE:')
+					alert(response.error);
+					window.location.href = response.redirect;
+					return;
+				}
+				alert('Voucher redeemed successfully.')
+				window.location.href = response.redirect;
 			},
 			error: function(xhr, status, error) {
 				// Handle error
 				// window.location.href = response.redirect;
+				console.log('ERROR CASE:')
 				console.log(xhr);
 				alert('Error handler: occurred while redeeming the voucher.');
 				window.location.href = "{{ route('home') }}";

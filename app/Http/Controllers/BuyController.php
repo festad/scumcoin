@@ -39,7 +39,8 @@ class BuyController extends Controller
         // // to the ajax error handler
         if (!Voucher::where('code', $request->code)->exists()) {
             error_log("Error in first if voucher does not exist");
-            return response()->json(['error' => 'Voucher does not exist']);
+            return response()->json(['error' => 'Voucher does not exist',
+                                     'redirect' => route('home')]);
         }
 
         $amount = Voucher::where('code', $request->code)->firstOrFail()->amount;

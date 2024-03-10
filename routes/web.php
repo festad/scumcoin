@@ -95,12 +95,6 @@ Route::middleware(['language'])->group(function () {
     )->name('home');
 });
 
-// Route::post('/',
-//             [HomeController::class, 'show']
-// )->name('home');
-
-
-
 Route::get('/register',
            [RegisterController::class, 'create']
 )->name('register');
