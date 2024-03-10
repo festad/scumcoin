@@ -58,6 +58,20 @@
 				</label>
 				</div>
 			</div>
+
+			<!-- notice-email-existence hidden -->
+			<div class="form-row justify-content-center notice-labels
+					notice-labels-email-existence">
+				<div class="form-group
+						notice-labels-email-existence">
+				<label
+					class="notice row"
+					id="notice-email-existence"
+					text="not_available"
+					hidden="true">
+				</label>
+				</div>
+			</div>
 			
 			<div class="form-row justify-content-center">
 				<!-- Password -->

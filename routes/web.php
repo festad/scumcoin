@@ -103,6 +103,10 @@ Route::post('/register',
             [RegisterController::class, 'store']
 );
 
+Route::post('/check_email',
+            [RegisterController::class, 'check_email']
+);
+
 Route::get('/login',
            [LoginController::class, 'show']
 )->name('login');
