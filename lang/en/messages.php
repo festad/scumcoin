@@ -1,6 +1,6 @@
 <?php
  
-// lang/pl/messages.php
+// lang/en/messages.php
  
 return [
     'register' => 'Registration',

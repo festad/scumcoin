@@ -13,6 +13,7 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ChangeController;
+use App\Http\Controllers\LanguageController;
 
 
 /*
@@ -26,7 +27,7 @@ use App\Http\Controllers\ChangeController;
 |
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'language'])->group(function () {
     
     Route::get('/change',
                [ChangeController::class, 'show']
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'changed_password'])->group(function () {
+Route::middleware(['auth', 'changed_password', 'language'])->group(function () {
 
     Route::controller(PayController::class)->group(function() {
         
@@ -82,15 +83,17 @@ Route::middleware(['auth', 'changed_password'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'changed_password', 'admin'])->group(function () {
+Route::middleware(['auth', 'changed_password', 'admin', 'language'])->group(function () {
     Route::get('/admin/dashboard',
                [AdminController::class, 'show_dash']
     )->name('admin.dashboard');
 });
 
-Route::get('/',
-           [HomeController::class, 'show']
-)->name('home');
+Route::middleware(['language'])->group(function () {
+    Route::get('/',
+            [HomeController::class, 'show']
+    )->name('home');
+});
 
 // Route::post('/',
 //             [HomeController::class, 'show']
@@ -114,28 +117,10 @@ Route::post('/login',
             [LoginController::class, 'authenticate']
 );
 
-
-
 Route::get('/user/{pubkey}',
            [UserController::class, 'show']
 )->name('user');
 
-
-
-Route::get('/reset',
-           [PasswordResetController::class, 'show']
-);
-
-Route::post('/reset',
-            [PasswordResetController::class, 'store']
-);
-
-Route::get('/lang/{locale}', function($locale) {
-    if (! in_array($locale, ['en', 'pl', 'it'])) {
-        abort(400);
-    }
-
-    App::setLocale($locale);
-
-    return redirect('/');
-});
+Route::get('/language/{lang}',
+           [LanguageController::class, 'switch']
+)->name('language.switch');

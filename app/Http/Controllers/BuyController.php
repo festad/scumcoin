@@ -43,7 +43,7 @@ class BuyController extends Controller
         }
 
         $amount = Voucher::where('code', $request->code)->firstOrFail()->amount;
-        error_log("Error in voucher amount firstOrFail");
+        error_log("After amount firstOrFail");
 
         Auth::user()->balance = Auth::user()->balance + $amount;
         Auth::user()->save();

@@ -30,6 +30,12 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
+        // Changing the language of the user
+        $cookieName = 'lang_pref_user_' . $user->id;
+        $userLocale = $request->cookie($cookieName, 'en'); // Default to 'en' if not set
+        app()->setLocale($userLocale); // Apply the language immediately
+        return redirect()->intended($this->redirectPath()); // Proceed as normal    
+
         // else
         return back()->withErrors([
             'password' => 'Death end: mismatch.',
