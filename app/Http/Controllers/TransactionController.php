@@ -35,16 +35,7 @@ class TransactionController extends Controller
      */
     public static function store(Request $request)
     {
-        $sender = $request->pubkey_sender;
-        $receiver = $request->pubkey_receiver;
-        $amount = $request->amount;
-        $transaction = new Transaction([
-            'sender' => $sender,
-            'receiver' => $receiver,
-            'amount' => $amount,
-        ]);
-        $transaction->save();
-        return $transaction;
+        // 
     }
 
     /**

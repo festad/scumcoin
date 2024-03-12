@@ -22,6 +22,14 @@
     <body>
         <x-nav></x-nav> <!-- My archlinux-like navbar component -->
 
+        @if($errors->any())
+            <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+            </div>
+        @endif        
+
         @yield('content') <!-- Main content will be injected here -->
 
         <!-- Scripts -->

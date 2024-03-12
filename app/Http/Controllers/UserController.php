@@ -108,7 +108,10 @@ class UserController extends Controller
      */
     public static function execute_deletion(Request $request)
     {
-        if ($request->pubkey != Auth::user()->pubkey &&
+        $user = User::where('pubkey', $request->pubkey)->firstOrFail();
+
+        if ($request->pubkey == Auth::user()->pubkey ||
+            $user->power == 'admin' ||
             Auth::user()->power != 'admin')
         {
             abort(401);

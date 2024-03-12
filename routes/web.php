@@ -50,6 +50,7 @@ Route::middleware(['auth', 'changed_password', 'language'])->group(function () {
 
         Route::post('/pay','execute_payment');
 
+        Route::get('/pay/success/{pubkey}/{amount}','success')->name('pay.success');
         
     });
 

@@ -23,22 +23,22 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)
               ->firstOrFail();
 
-        if (hash('sha256', $request->password) ==
-                        $user->password) {
+        if (hash('sha256', $request->password) == $user->password) {
             $request->session()->regenerate();
             Auth::login($user);
             return redirect()->intended('/');
         }
 
-        // Changing the language of the user
-        $cookieName = 'lang_pref_user_' . $user->id;
-        $userLocale = $request->cookie($cookieName, 'en'); // Default to 'en' if not set
-        app()->setLocale($userLocale); // Apply the language immediately
-        return redirect()->intended($this->redirectPath()); // Proceed as normal    
+        // log.info("User " . $user->id . " failed to login");
+        // // Changing the language of the user
+        // $cookieName = 'lang_pref_user_' . $user->id;
+        // $userLocale = $request->cookie($cookieName, 'en'); // Default to 'en' if not set
+        // app()->setLocale($userLocale); // Apply the language immediately
+        // return redirect()->intended($this->redirectPath()); // Proceed as normal    
 
         // else
         return back()->withErrors([
-            'password' => 'Death end: mismatch.',
-        ])->onlyInput('password');
+            'password' => 'Email or password is incorrect.',
+        ]);
     }
 }

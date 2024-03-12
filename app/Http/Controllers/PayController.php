@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 
 use App\Models\User;
+use App\Http\DataLayer\DataLayer;
+use Exception;
 
 
 class PayController extends Controller
@@ -19,9 +21,7 @@ class PayController extends Controller
             return redirect('/');
         }
 
-        $otherUsers = User::whereNotIn('pubkey',
-                                       [Auth::user()->pubkey])
-                    ->get();
+        $otherUsers = User::whereNotIn('pubkey', [Auth::user()->pubkey])->get();
         
         return view('pay', [
             'otherUsers' => $otherUsers,
@@ -39,41 +39,30 @@ class PayController extends Controller
     }
 
     public function execute_payment(Request $request) {
-        if ($request->pubkey_sender != Auth::user()->pubkey) {
-            abort(401); // NON AUTHORIZED!
+
+        try {
+
+            $datalayer = new DataLayer();
+    
+            $datalayer->execute_payment($request->pubkey_sender,
+                                        $request->pubkey_receiver,
+                                        $request->amount);
+    
+            return redirect()->route('pay.success', [
+                'pubkey' => $request->pubkey_receiver,
+                'amount' => $request->amount
+            ]);
+
+        } catch (Exception $e) {
+            return redirect()->route('home')->withErrors(['error' => $e->getMessage()]);
         }
+    }
 
-        if ($request->pubkey_receiver == Auth::user()->pubkey) {
-            abort(401); // CAN'T PAY TO MYSELF!
-        }
-
-        $sender = User::where('pubkey',
-                             $request->pubkey_sender)->firstOrFail();
-        $receiver = User::where('pubkey',
-                               $request->pubkey_receiver)->firstOrFail();
-
-        if ($sender->balance < $request->amount) {
-            abort(401); // CAN'T SPEND MORE THAN I HAVE!
-        }
-
-        if ($request->amount <= 0) {
-            abort(401); // CAN'T SPEND NEGATIVE AMOUNT OF SCUMCOIN!
-        }
-        
-        
-        $transaction = TransactionController::store($request);
-        $sender->balance = $sender->balance - $request->amount;
-        $receiver->balance = $receiver->balance + $request->amount;
-
-        $sender->save();
-        $receiver->save();
-
-        $sender->transactions()->save($transaction);
-        $receiver->transactions()->save($transaction);
-        
-
-        return view('success', ['pubkey' => $receiver->pubkey,
-                                'amount' => $request->amount]);
+    public function success($pubkey, $amount) {
+        return view('success', [
+            'pubkey' => $pubkey,
+            'amount' => $amount
+        ]);
     }
         
 }

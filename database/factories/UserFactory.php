@@ -20,7 +20,7 @@ class UserFactory extends Factory
 
         $email  = fake()->unique()->safeEmail();
         $pubkey = hash('sha256', $email);
-        $pass   = Str::random(16);
+        $pass   = "password";
         $hash    = hash('sha256', $pass);
         $balance = rand(10, 500);
 	
@@ -31,6 +31,8 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => $hash,
             'balance' => $balance,
+            'power' => 'normal',
+            'change_password' => 0,
             'remember_token' => Str::random(10),
         ];
     }
