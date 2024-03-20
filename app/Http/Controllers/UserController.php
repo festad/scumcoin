@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserDataLayer;
 use Illuminate\Support\Facades\Auth;
+use App\Http\DataLayer\DataLayer;
 
 
 class UserController extends Controller
@@ -124,5 +125,21 @@ class UserController extends Controller
 
         return view('success_deletion', ['pubkey' => $request->pubkey,
                                          'email' => $email]);
+    }
+
+    public function searchByPublicKey(Request $request)
+    {
+        $input_public_key = $request->input('public_key');
+        $dl = new DataLayer();
+        $users = $dl->search_users_by_public_key($input_public_key);
+        return view('partials.users', ['users' => $users]);
+    }
+
+    public function searchByEmail(Request $request)
+    {
+        $input_email = $request->input('email');
+        $dl = new DataLayer();
+        $users = $dl->search_users_by_email($input_email);
+        return view('partials.users', ['users' => $users]);
     }
 }

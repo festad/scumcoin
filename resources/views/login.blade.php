@@ -24,7 +24,7 @@
 			<div class="form-row justify-content-center">
 				<!-- Email Address -->
 				<div class="form-group">
-					<a href="/reset"
+					<a href="{{ route('forgot') }}"
 						class="link-secondary">
 						Forgot password?
 					</a>

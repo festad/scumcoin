@@ -88,6 +88,14 @@ Route::middleware(['auth', 'changed_password', 'admin', 'language'])->group(func
     Route::get('/admin/dashboard',
                [AdminController::class, 'show_dash']
     )->name('admin.dashboard');
+
+    Route::get('/admin/users/search/pubkey',
+               [UserController::class, 'searchByPublicKey']
+    )->name('admin.users.search.pubkey');
+
+    Route::get('/admin/users/search/email',
+               [UserController::class, 'searchByEmail']
+    )->name('admin.users.search.email');
 });
 
 Route::middleware(['language'])->group(function () {
@@ -115,6 +123,14 @@ Route::get('/login',
 Route::post('/login',
             [LoginController::class, 'authenticate']
 );
+
+Route::get('/forgot',
+           [PasswordResetController::class, 'show']
+)->name('forgot');
+
+Route::patch('/reset',
+              [PasswordResetController::class, 'store']
+)->name('reset');
 
 Route::get('/user/{pubkey}',
            [UserController::class, 'show']

@@ -46,4 +46,20 @@ class DataLayer
         $receiver->transactions()->save($transaction);
     }
 
+    public function search_users_by_public_key($public_key)
+    {
+        $all_users = User::all();
+        return $all_users->filter(function ($user) use ($public_key) {
+            return strpos($user->pubkey, $public_key) !== false;
+        });
+    }
+
+    public function search_users_by_email($email)
+    {
+        $all_users = User::all();
+        return $all_users->filter(function ($user) use ($email) {
+            return strpos($user->email, $email) !== false;
+        });
+    }
+
 }

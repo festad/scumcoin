@@ -8,7 +8,14 @@
 
 		<div class="col">
 
-			<table class="table table-bordered">
+			<input type="text" id="searchByPublicKey" placeholder="Filter by public key"
+				class="form-control" style="width: auto; display: inline-block; margin-left: 10px;">
+			<input type="text" id="searchByEmail" placeholder="Filter by email"
+				class="form-control" style="width: auto; display: inline-block; margin-left: 10px;">
+
+			<!-- horizontal space -->
+
+			<table class="table table-bordered" style="margin-top: 10px;">
 				<thead>
 					<tr>
 						<th scope="col">Public key</th>
@@ -17,8 +24,8 @@
 						<th scope="col">Registration date</th>
 					</tr>
 				</thead>
-				@foreach ($users as $user)
 				<tbody>
+				@foreach ($users as $user)
 					<tr>
 						<td>
 							<a href={{ sprintf("/user/%s",
@@ -39,11 +46,48 @@
 						{{ $user->created_at }}
 						</td>
 					</tr>
-				</tbody>
 				@endforeach
+				</tbody>
 			</table>
 			{{ $users->links() }}
 		</div>
 	</div>
 </div>
 @endsection
+
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+	$('#searchByPublicKey').on('keyup', function() {
+		var value = $(this).val();
+		$.ajax({
+			url: '{{ route('admin.users.search.pubkey') }}',
+			type: 'GET',
+			data: {
+				'public_key': value
+			},
+			success: function(response) {
+				$('table tbody').html(response);
+			}
+		});
+	});
+});
+
+$(document).ready(function() {
+	$('#searchByEmail').on('input', function() {
+		var value = $(this).val();
+		$.ajax({
+			url: '{{ route('admin.users.search.email') }}',
+			type: 'GET',
+			data: {
+				'email': value
+			},
+			success: function(response) {
+				$('table tbody').html(response);
+			}
+		});
+	});
+});
+</script>
+@endpush

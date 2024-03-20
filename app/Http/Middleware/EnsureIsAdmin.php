@@ -21,7 +21,9 @@ class EnsureIsAdmin
     {
         if (Auth::user()->power != 'admin')
         {
-            return redirect()->route('home');
+            return redirect()->route('home')->withErrors([
+                'password' => 'You are not an admin.',
+            ]);
         }
         return $next($request);
     }

@@ -9,7 +9,7 @@ $('#reset_form').on('submit', function(event) {
     };
 
     $.ajax({
-        type: 'POST',
+        type: 'PATCH',
         url: '/reset',
         data: formData,
         dataType: 'json',

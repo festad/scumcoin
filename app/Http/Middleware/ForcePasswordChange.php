@@ -21,7 +21,9 @@ class ForcePasswordChange
     {
         if (Auth::user()->change_password)
         {
-            return redirect()->route('change');
+            return redirect()->route('change')->withErrors([
+                'password' => 'You must change your password.',
+            ]);
         }
         
         return $next($request);
