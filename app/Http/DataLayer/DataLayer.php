@@ -4,6 +4,7 @@ namespace App\Http\DataLayer;
 
 use App\Models\User;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 
 use Exception;
 
@@ -20,30 +21,43 @@ class DataLayer
 
     public function execute_payment($pubkey_sender, $pubkey_receiver, $amount)
     {
-        $sender = User::where('pubkey', $pubkey_sender)->firstOrFail();
-        $receiver = User::where('pubkey', $pubkey_receiver)->firstOrFail();
-
-        if ($sender->balance < $amount) {
-            throw new Exception('Insufficient funds');
-        }
-
         if ($amount <= 0) {
             throw new Exception('Invalid amount');
         }
 
-        $sender->balance -= $amount;
-        $receiver->balance += $amount;
-        $transaction = new Transaction([
-            'sender' => $pubkey_sender,
-            'receiver' => $pubkey_receiver,
-            'amount' => $amount,
-        ]);
+        DB::beginTransaction();
 
-        $transaction->save();
-        $sender->save();
-        $receiver->save();
-        $sender->transactions()->save($transaction);
-        $receiver->transactions()->save($transaction);
+        try {
+
+            $sender = User::where('pubkey', $pubkey_sender)->firstOrFail();
+            $receiver = User::where('pubkey', $pubkey_receiver)->firstOrFail();
+
+            if ($sender->balance < $amount) {
+                throw new Exception('Insufficient funds');
+            }
+
+
+            $sender->balance -= $amount;
+            $receiver->balance += $amount;
+
+            $transaction = new Transaction([
+                'sender' => $pubkey_sender,
+                'receiver' => $pubkey_receiver,
+                'amount' => $amount,
+            ]);
+
+            $transaction->save();
+            $sender->save();
+            $receiver->save();
+            
+            $sender->transactions()->save($transaction);
+            $receiver->transactions()->save($transaction);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 
     public function search_users_by_public_key($public_key)

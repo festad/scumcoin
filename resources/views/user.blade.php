@@ -115,7 +115,7 @@
 				@foreach($transactions as $transaction)
 				<tr>
 					<td>
-					<a href={{ sprintf("/user/%s", $user->pubkey) }}
+					<a href='{{ sprintf("/user/%s", $user->pubkey) }}'
 					class="link-secondary">
 						{{ sprintf("%32.32s ...", $user->pubkey) }}
 					</a>
@@ -130,7 +130,7 @@
 						</svg>
 					</td>
 					<td>
-						<a href={{ sprintf("/user/%s", $transaction->receiver) }}
+						<a href='{{ sprintf("/user/%s", $transaction->receiver) }}'
 						class="link-secondary">
 						{{ sprintf("%32.32s ...", $transaction->receiver) }}
 						</a>
@@ -147,7 +147,7 @@
 						</svg>
 					</td>
 					<td>
-						<a href={{ sprintf("/user/%s", $transaction->sender) }}
+						<a href='{{ sprintf("/user/%s", $transaction->sender) }}'
 						class="link-secondary">
 						{{ sprintf("%32.32s ...", $transaction->sender) }}
 						</a>
@@ -163,7 +163,7 @@
 				@endforeach
 			</tbody>
 			</table>
-
+			{{ $transactions->links() }}
 		</div>
 	</div>
 </div>
