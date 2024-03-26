@@ -14,7 +14,7 @@
 
 	<input type="hidden"
 			name="pubkey_sender"
-			value={{ Auth::user()->pubkey }}>
+			value="{{ Auth::user()->pubkey }}">
 
 	<div class="form-row justify-content-center">
 	

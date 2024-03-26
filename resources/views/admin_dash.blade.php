@@ -25,28 +25,28 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach ($users as $user)
-					<tr>
-						<td>
-							<a href={{ sprintf("/user/%s",
-									$user->pubkey) }}
-							class="link-secondary">
-								{{ sprintf("%32.32s ...",
-									$user->pubkey) }}
-							</a>
-						</td>
-						<td>
-						{{ sprintf("%32.32s",
-							$user->email) }}
-						</td>
-						<td>
-						{{ $user->balance }}
-						</td>
-						<td>
-						{{ $user->created_at }}
-						</td>
-					</tr>
-				@endforeach
+					@foreach ($users as $user)
+						<tr>
+							<td>
+								<a href={{ sprintf("/user/%s",
+										$user->pubkey) }}
+								class="link-secondary">
+									{{ sprintf("%32.32s ...",
+										$user->pubkey) }}
+								</a>
+							</td>
+							<td>
+								{{ sprintf("%32.32s",
+									$user->email) }}
+							</td>
+							<td>
+								{{ $user->balance }}	
+							</td>
+							<td>
+								{{ $user->created_at }}
+							</td>
+						</tr>
+					@endforeach
 				</tbody>
 			</table>
 			{{ $users->links() }}
@@ -72,9 +72,9 @@ $(document).ready(function() {
 			}
 		});
 	});
-});
+// });
 
-$(document).ready(function() {
+// $(document).ready(function() {
 	$('#searchByEmail').on('input', function() {
 		var value = $(this).val();
 		$.ajax({

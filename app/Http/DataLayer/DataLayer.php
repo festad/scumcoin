@@ -5,6 +5,7 @@ namespace App\Http\DataLayer;
 use App\Models\User;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Exception;
 
@@ -32,6 +33,17 @@ class DataLayer
             $sender = User::where('pubkey', $pubkey_sender)->firstOrFail();
             $receiver = User::where('pubkey', $pubkey_receiver)->firstOrFail();
 
+            // If the sender and receiver are the same, throw an exception
+            if ($sender->pubkey === $receiver->pubkey) {
+                throw new Exception('Cannot send money to yourself');
+            }
+
+            // If the sender does not coincide with the authenticated user, throw an exception
+            if ($sender->pubkey !== Auth::user()->pubkey) {
+                throw new Exception('You cannot ask others to pay for yourself!');
+            }
+
+            // If the sender does not have enough balance, throw an exception
             if ($sender->balance < $amount) {
                 throw new Exception('Insufficient funds');
             }

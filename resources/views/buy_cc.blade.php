@@ -4,10 +4,23 @@
 
 @section('content')
 	
-<div class="container-fluid"
-	style="margin-top: 200px">
+<div class="container-fluid mt-3">
 
-	<div class="row justify-content-center" id="paypal-content">
+	<div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Buy CC
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" value="{{ $amount }}" readonly>
+                    </div>
+                    <div id="paypal-content"></div>
+                </div>
+            </div>
+        </div>
 	</div>
 
 </div>
