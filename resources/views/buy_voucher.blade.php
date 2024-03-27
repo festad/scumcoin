@@ -35,8 +35,9 @@
 
 	<div class="form-row justify-content-center">
 		<button class="btn btn-primary arch"
-			type="button"
-			id="buy_button">
+			type="submit"
+			id="buy_button"
+			disabled>
 			Redeem
 		</button>
 	</div>
@@ -55,8 +56,11 @@
 	// to "/buy/voucher/complete"
 	// and redirects to home in case of success or shows an alert
 	// in case of error
+
 	$('#buy_button').click(function() {
 		event.preventDefault();
+		// disable the button to prevent multiple clicks
+		$('#buy_button').prop('disabled', true);
 
 		$.ajax({
 			url: '/buy/voucher/complete',
