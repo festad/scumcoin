@@ -1,4 +1,4 @@
-$('#buy_button').attr("type", "button");
+// $('#buy_button').attr("type", "button");
 
 $('#buy_button').css({
 	'background-color': 'rgba(0,0,0,0)',
@@ -7,9 +7,9 @@ $('#buy_button').css({
 	'color': 'red',
 });
 
-$('#buy_button').on('click', function() {
-	console.log('Complete the form!');
-});
+// $('#buy_button').on('click', function() {
+// 	console.log('Complete the form!');
+// });
 
 function amount_check(amount) {
 	return /^[0-9]+\.[0-9][0-9]$/.test(amount);
@@ -17,7 +17,11 @@ function amount_check(amount) {
 
 function check_and_abilitate() {
 	if (amount_check($('#amount').val())) {
-        $('#buy_button').attr("type","submit");
+
+        $('#buy_button').prop('disabled', false);
+
+        // $('#buy_button').attr("type","submit");
+        
         $('#buy_button').on('mouseover', function() {
             $(this).css({
             'background-color': '#08c',
@@ -36,7 +40,9 @@ function check_and_abilitate() {
 
 	} else {
 
-        $('#buy_button').attr("type", "button");
+        $('#buy_button').prop('disabled', true);
+
+        // $('#buy_button').attr("type", "button");
         
         $('#buy_button').on('mouseover', function() {
             $(this).css({

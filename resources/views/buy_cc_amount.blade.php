@@ -36,7 +36,7 @@
 
 	<div class="form-row justify-content-center">
 		<button class="btn btn-primary arch"
-			type="button"
+			type="submit"
 			id="buy_button">
 		Buy
 		</button>

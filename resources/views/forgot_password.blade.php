@@ -31,7 +31,7 @@
 		</form>
 
 		<!-- Display the new password -->
-		<div class="form-row justify-content-center">
+		<div class="form-row justify-content-center" style="margin-top: 20px;">
 			<div class="alert alert-success"
 				id="resetMessage"
 				style="display: none;">

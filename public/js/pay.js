@@ -1,4 +1,4 @@
-$('#pay_button').attr("type", "button");
+// $('#pay_button').attr("type", "button");
 
 $('#pay_button').css({
     'background-color': 'rgba(0,0,0,0)',
@@ -7,9 +7,9 @@ $('#pay_button').css({
     'color': 'red',
 });
 
-$('#pay_button').on('click', function() {
-    console.log('Complete the form!');
-});
+// $('#pay_button').on('click', function() {
+//     console.log('Complete the form!');
+// });
 
 function amount_check(amount) {
     return /^[0-9]+\.[0-9][0-9]$/.test(amount);
@@ -29,7 +29,8 @@ function isValidReceiver(pubkey) {
 function check_and_abilitate() {
     var pubkey = $('#pubkey_receiver').val();
     if (amount_check($('#amount').val()) && isValidReceiver(pubkey)) {
-        $('#pay_button').attr("type", "submit");
+        // $('#pay_button').attr("type", "submit");
+        $('#pay_button').prop('disabled', false);
         $('#pay_button').on('mouseover', function() {
             $(this).css({
                 'background-color': '#08c',
@@ -46,7 +47,8 @@ function check_and_abilitate() {
             });
         });
     } else {
-        $('#pay_button').attr("type", "button");
+        // $('#pay_button').attr("type", "button");
+        $('#pay_button').prop('disabled', true);
         $('#pay_button').on('mouseover', function() {
             $(this).css({
                 'background-color': 'red',
@@ -79,7 +81,6 @@ $('#pay_button').on('mouseover', function() {
         'border-color': 'red',
         'color': 'white'
     });
-
     check_and_abilitate();
 });
 
